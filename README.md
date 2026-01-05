@@ -1,101 +1,295 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Glossy Pout – Premium Lip Gloss</title>
+    <title>Glossy Pout – Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
-        body {font-family: Arial, sans-serif; margin:0; line-height:1.6; color:#333;}
-        header {background:#e621e6; color:#fff; padding:1rem; text-align:center;}
-        header h1 {margin:0; font-size:2rem;}
-        nav {background:#222; overflow:hidden;}
-        nav a {float:left; display:block; color:#fff; padding:0.8rem 1.2rem; text-decoration:none;}
-        nav a:hover {background:#f031c6;}
-        .container {max-width:960px; margin:auto; padding:1rem;}
-        .hero {background:#ffe0e0; padding:2rem; text-align:center;}
-        .hero h2 {margin:0; font-size:1.8rem;}
-        .products {display:flex; flex-wrap:wrap; gap:1rem; margin-top:2rem;}
-        .product {border:1px solid #ddd; border-radius:8px; padding:1rem; width:calc(33% - 2rem); text-align:center;}
-        .product img {max-width:100%; height:auto; border-radius:4px;}
-        .price {font-weight:bold; color:#e72fde;}
-        .btn {background:#ff57d5; color:#fff; border:none; padding:0.6rem 1.2rem; cursor:pointer; border-radius:4px;}
-        .btn:hover {background:#f308a5;}
-        footer {background:#222; color:#fff; text-align:center; padding:0.8rem; margin-top:2rem;}
-        .form-group {margin-bottom:1rem;}
-        label {display:block; margin-bottom:.2rem;}
-        input, textarea {width:100%; padding:.4rem; border:1px solid #ddd; border-radius:4px;}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: #333;
+        }
+
+        header {
+            background: #e621e6;
+            color: white;
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        nav {
+            background: #222;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            padding: 1rem;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background: #f031c6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 1.5rem;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .product img {
+            max-width: 100%;
+            border-radius: 6px;
+        }
+
+        .price {
+            color: #e72fde;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            background: #ff57d5;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #f308a5;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 3rem;
+        }
     </style>
 </head>
+
 <body>
 
 <header>
-    <h1>Glossy Pout</h1>
-    <p>Premium lip gloss for every mood</p>
+    <h1>Our Lip Gloss Collection</h1>
+    <p>Find your perfect shade</p>
 </header>
 
 <nav>
-    <a href="#home">Home</a>
-    <a href="#products">Products</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
 </nav>
 
-<div class="container" id="home">
-    <section class="hero">
-        <h2>Embrace Your Beauty, Shine On.</h2>
-        <p>Hydrating, cruelty‑free formulas that give you that perfect glossy finish.</p>
-        <button class="btn">Shop Now</button>
-    </section>
+<div class="container">
 
-    <section id="products">
-        <h2>Our Collection</h2>
-        <div class="products">
-            <div class="product">
-                <img src="https://via.placeholder.com/150?text=Pink" alt="candy Cloud">
-                <h3>candy Cloud</h3>
-                <p class="price">₦3,000</p>
-                <button class="btn">Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/150?text=Berry" alt="Choco royale">
-                <h3>Choco royale</h3>
-                <p class="price">₦3,000</p>
-                <button class="btn">Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/150?text=Nude" alt="bare essence">
-                <h3>bare essence</h3>
-                <p class="price">₦3,000</p>
-                <button class="btn">Add to Cart</button>
-            </div>
+    <div class="products">
+
+        <div class="product">
+            <img src="https://via.placeholder.com/250?text=Candy+Cloud" alt="Candy Cloud">
+            <h3>Candy Cloud</h3>
+            <p>Sweet pink gloss with a soft, glossy finish.</p>
+            <p class="price">₦3,000</p>
+            <button class="btn">Add to Cart</button>
         </div>
-    </section>
 
-    <section id="about">
-        <h2>About Us</h2>
-        <p>Glossy Pout was founded in 2025 with a mission to deliver high‑quality, vegan, paraben‑free lip gloss that feels as good as it looks. Our formulas are packed with essential oil for lasting moisture.</p>
-    </section>
+        <div class="product">
+            <img src="https://via.placeholder.com/250?text=Choco+Royale" alt="Choco Royale">
+            <h3>Choco Royale</h3>
+            <p>Rich brown shade perfect for bold, confident looks.</p>
+            <p class="price">₦3,000</p>
+            <button class="btn">Add to Cart</button>
+        </div>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:okohchristabel06@gmail.com">okohchristabel06@gmail.com</a></p>
-        <p>Phone: +2348110878047</p>
-        <form action="mailto:okohchristabel06@gmail.com" method="post" enctype="text/plain">
-            <div class="form-group">
-                <label for="name">Customer Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="request">Customer Request</label>
-                <textarea id="request" name="request" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="btn">Submit Request</button>
-        </form>
-    </section>
+        <div class="product">
+            <img src="https://via.placeholder.com/250?text=Bare+Essence" alt="Bare Essence">
+            <h3>Bare Essence</h3>
+            <p>Natural nude gloss for everyday beauty.</p>
+            <p class="price">₦3,000</p>
+            <button class="btn">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/250?text=Berry+Pop" alt="Berry Pop">
+            <h3>Berry Pop</h3>
+            <p>Juicy berry shade with extra shine.</p>
+            <p class="price">₦3,500</p>
+            <button class="btn">Add to Cart</button>
+        </div>
+
+    </div>
+
 </div>
 
 <footer>
-    &copy; 2025 Glossy Pout. All rights reserved.
+    &copy; 2025 Glossy Pout. All Rights Reserved.
+</footer>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Glossy Pout – Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: #333;
+        }
+
+        header {
+            background: #e621e6;
+            color: white;
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        nav {
+            background: #222;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            padding: 1rem;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background: #f031c6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 1.5rem;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .product img {
+            max-width: 100%;
+            border-radius: 6px;
+        }
+
+        .price {
+            color: #e72fde;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            background: #ff57d5;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #f308a5;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Our Lip Gloss Collection</h1>
+    <p>Find your perfect shade</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+</nav>
+
+<div class="container">
+
+    <div class="products">
+
+        <div class="product">
+            <img src="https://via.placeholder.com/250?text=Candy+Cloud" alt="Candy Cloud">
+            <h3>Candy Cloud</h3>
+            <p>Sweet pink gloss with a soft, glossy finish.</p>
+            <p class="price">₦3,000</p>
+            <button class="btn">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/250?text=Choco+Royale" alt="Choco Royale">
+            <h3>Choco Royale</h3>
+            <p>Rich brown shade perfect for bold, confident looks.</p>
+            <p class="price">₦3,000</p>
+            <button class="btn">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/250?text=Bare+Essence" alt="Bare Essence">
+            <h3>Bare Essence</h3>
+            <p>Natural nude gloss for everyday beauty.</p>
+            <p class="price">₦3,000</p>
+            <button class="btn">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/250?text=Berry+Pop" alt="Berry Pop">
+            <h3>Berry Pop</h3>
+            <p>Juicy berry shade with extra shine.</p>
+            <p class="price">₦3,500</p>
+            <button class="btn">Add to Cart</button>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    &copy; 2025 Glossy Pout. All Rights Reserved.
 </footer>
 
 </body>
