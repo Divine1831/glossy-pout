@@ -1,20 +1,21 @@
 const PRODUCTS = [
- {id:"moisturizing-lip-balm",name:"Moisturizing Lip Balm",type:"care",kind:"balm",price:1500,desc:"Everyday lip care"},
- {id:"cherry-pop",name:"Cherry Pop",type:"gloss",kind:"gloss",price:null,desc:"A bold red lip gloss"},
- {id:"candy-cloud",name:"Candy Cloud",type:"gloss",kind:"gloss",price:3000,desc:"A soft pink lip gloss"},
- {id:"mystic-glow",name:"Mystic Glow",type:"gloss",kind:"gloss",price:null,desc:"Colour-changing lip gloss"},
- {id:"peach-perfect",name:"Peach Perfect",type:"gloss",kind:"gloss",price:null,desc:"A peachy nude lip gloss"},
- {id:"lipcare-kit",name:"Lipcare Kit",type:"care",kind:"balm",price:null,desc:"A little care bundle"},
- {id:"clear-lipgloss",name:"Clear Lipgloss",type:"gloss",kind:"gloss",price:2500,desc:"A clear glossy finish"},
- {id:"lip-scrub",name:"Lip Scrub",type:"care",kind:"scrub",price:1500,desc:"A lip-care essential"},
- {id:"starlight",name:"Starlight",type:"gloss",kind:"gloss",price:null,desc:"A glittery lip gloss"},
- {id:"choco-royale",name:"Choco Royale",type:"gloss",kind:"gloss",price:3000,desc:"A rich brown lip gloss"},
- {id:"pink-lip-balm",name:"Pink Lip Balm",type:"care",kind:"balm",price:null,desc:"A touch of pink care"},
- {id:"lip-brush",name:"Lip Brush",type:"tools",kind:"tool",price:null,desc:"A handy lip tool"},
- {id:"black-lip-liner",name:"Black Lip Liner",type:"liner",kind:"liner",price:null,desc:"Define your look"},
- {id:"brown-lip-liner",name:"Brown Lip Liner",type:"liner",kind:"liner",price:null,desc:"Define your look"},
- {id:"burgundy-lip-liner",name:"Burgundy Lip Liner",type:"liner",kind:"liner",price:null,desc:"Define your look"}
+  {id:"moisturizing-lip-balm",name:"Moisturizing Lip Balm",type:"care",kind:"balm",price:1500,desc:"Everyday lip care"},
+  {id:"cherry-pop",name:"Cherry Pop",type:"gloss",kind:"gloss",price:3000,desc:"A bold red lip gloss"},
+  {id:"candy-cloud",name:"Candy Cloud",type:"gloss",kind:"gloss",price:3000,desc:"A soft pink lip gloss"},
+  {id:"mystic-glow",name:"Mystic Glow",type:"gloss",kind:"gloss",price:3000,desc:"Colour-changing lip gloss"},
+  {id:"peach-perfect",name:"Peach Perfect",type:"gloss",kind:"gloss",price:3000,desc:"A peachy nude lip gloss"},
+  {id:"lipcare-kit",name:"Lipcare Kit",type:"care",kind:"balm",price:3000,desc:"A little care bundle"},
+  {id:"clear-lipgloss",name:"Clear Lipgloss",type:"gloss",kind:"gloss",price:2500,desc:"A clear glossy finish"},
+  {id:"lip-scrub",name:"Lip Scrub",type:"care",kind:"scrub",price:1500,desc:"A lip-care essential"},
+  {id:"starlight",name:"Starlight",type:"gloss",kind:"gloss",price:3000,desc:"A glittery lip gloss"},
+  {id:"choco-royale",name:"Choco Royale",type:"gloss",kind:"gloss",price:3000,desc:"A rich brown lip gloss"},
+  {id:"pink-lip-balm",name:"Pink Lip Balm",type:"care",kind:"balm",price:3000,desc:"A touch of pink care"},
+  {id:"lip-brush",name:"Lip Brush",type:"tools",kind:"tool",price:3000,desc:"A handy lip tool"},
+  {id:"black-lip-liner",name:"Black Lip Liner",type:"liner",kind:"liner",price:1500,desc:"Define your look"},
+  {id:"brown-lip-liner",name:"Brown Lip Liner",type:"liner",kind:"liner",price:1500,desc:"Define your look"},
+  {id:"burgundy-lip-liner",name:"Burgundy Lip Liner",type:"liner",kind:"liner",price:1500,desc:"Define your look"}
 ];
+
 const DISCOUNT = 0.10;
 const money = n => new Intl.NumberFormat("en-NG",{style:"currency",currency:"NGN",maximumFractionDigits:0}).format(n);
 const byId = id => document.getElementById(id);
