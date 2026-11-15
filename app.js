@@ -15,7 +15,7 @@ const PRODUCTS = [
     kind: "gloss",
     price: 3000,
     desc: "A bold red lip gloss",
-    image: "https://drive.google.com/uc?export=view&id=1ErqSBrclazr4dqiYbOJKEtTspC2A7lt7"
+    image: "https://drive.google.com/thumbnail?id=1ErqSBrclazr4dqiYbOJKEtTspC2A7lt7&sz=w1000"
   },
   {
     id: "candy-cloud",
