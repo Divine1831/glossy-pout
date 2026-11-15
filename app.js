@@ -1,3 +1,4 @@
+
 const PRODUCTS = [
   {
     id: "moisturizing-lip-balm",
@@ -136,8 +137,8 @@ const PRODUCTS = [
   }
 ];
 
-
 const DISCOUNT = 0.10;
+
 const money = n => new Intl.NumberFormat("en-NG", {
   style: "currency",
   currency: "NGN",
@@ -161,6 +162,209 @@ function discounted(price) {
   return Math.round(price * (1 - DISCOUNT));
 }
 
+/* =====================================
+   PRODUCT QUICK VIEW POP-UP
+===================================== */
+
+const quickViewStyle = document.createElement("style");
+
+quickViewStyle.textContent = `
+  #productQuickView {
+    position: fixed;
+    width: min(92%, 520px);
+    max-width: 520px;
+    max-height: 90vh;
+    padding: 0;
+    border: none;
+    border-radius: 22px;
+    overflow: auto;
+    background: #fff;
+    color: #29202a;
+    box-shadow: 0 20px 70px rgba(0,0,0,.3);
+  }
+
+  #productQuickView::backdrop {
+    background: rgba(20, 10, 20, .72);
+    backdrop-filter: blur(5px);
+  }
+
+  .quick-view-image {
+    width: 100%;
+    height: 360px;
+    object-fit: contain;
+    background: #fff5f8;
+    display: block;
+  }
+
+  .quick-view-content {
+    padding: 22px;
+  }
+
+  .quick-view-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: white;
+    color: #333;
+    font-size: 25px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,.12);
+  }
+
+  .quick-view-content h2 {
+    margin: 0 0 8px;
+    font-size: 25px;
+  }
+
+  .quick-view-content p {
+    color: #777;
+    margin: 8px 0;
+  }
+
+  .quick-view-price {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #d94f83;
+  }
+
+  .quick-view-old {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  .quick-view-discount {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #ffe6ef;
+    color: #c13b70;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .quick-view-add {
+    width: 100%;
+    padding: 15px;
+    border: 0;
+    border-radius: 12px;
+    background: #d94f83;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s ease;
+  }
+
+  .quick-view-add:hover {
+    background: #bd356b;
+  }
+
+  .product-visual,
+  .product-name {
+    cursor: pointer;
+  }
+
+  .product-visual img {
+    cursor: zoom-in;
+  }
+
+  @media (max-width: 480px) {
+    #productQuickView {
+      width: 94%;
+      border-radius: 18px;
+    }
+
+    .quick-view-image {
+      height: 290px;
+    }
+
+    .quick-view-content {
+      padding: 18px;
+    }
+  }
+`;
+
+document.head.appendChild(quickViewStyle);
+
+const quickView = document.createElement("dialog");
+quickView.id = "productQuickView";
+
+quickView.innerHTML = `
+  <button
+    class="quick-view-close"
+    type="button"
+    aria-label="Close product details"
+  >×</button>
+
+  <div id="quickViewDetails"></div>
+`;
+
+document.body.appendChild(quickView);
+
+function openProductView(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+
+  if (!p) return;
+
+  const finalPrice = discounted(p.price);
+
+  byId("quickViewDetails").innerHTML = `
+    <img
+      class="quick-view-image"
+      src="${p.image}"
+      alt="${p.name}"
+    >
+
+    <div class="quick-view-content">
+      <span class="quick-view-discount">10% OFF</span>
+
+      <h2>${p.name}</h2>
+
+      <p>${p.desc}</p>
+
+      <div class="quick-view-price">
+        ${money(finalPrice)}
+        <span class="quick-view-old">${money(p.price)}</span>
+      </div>
+
+      <button
+        class="quick-view-add"
+        type="button"
+        data-quick-add="${p.id}"
+      >
+        Add to bag
+      </button>
+    </div>
+  `;
+
+  quickView.showModal();
+}
+
+quickView.querySelector(".quick-view-close").addEventListener("click", () => {
+  quickView.close();
+});
+
+quickView.addEventListener("click", e => {
+  if (e.target === quickView) {
+    quickView.close();
+  }
+});
+
+/* =====================================
+   RENDER PRODUCTS
+===================================== */
+
 function renderProducts() {
   const q = byId("searchInput").value.trim().toLowerCase();
 
@@ -177,7 +381,8 @@ function renderProducts() {
 
         return `
           <article class="product-card">
-            <div class="product-visual">
+
+            <div class="product-visual" data-view="${p.id}">
               ${available ? '<span class="discount-tag">10% OFF</span>' : ''}
 
               <img
@@ -203,7 +408,9 @@ function renderProducts() {
               </div>
             </div>
 
-            <h3 class="product-name">${p.name}</h3>
+            <h3 class="product-name" data-view="${p.id}">
+              ${p.name}
+            </h3>
 
             <p class="product-type">
               ${
@@ -234,11 +441,16 @@ function renderProducts() {
                 ${available ? "Add to bag" : "Coming soon"}
               </button>
             </div>
+
           </article>
         `;
       }).join("")
     : '<p class="no-results">No products match your search. Try another name.</p>';
 }
+
+/* =====================================
+   CART FUNCTIONS
+===================================== */
 
 function persist() {
   localStorage.setItem("glossyPoutCart", JSON.stringify(cart));
@@ -267,6 +479,7 @@ function totals() {
 
 function renderCart() {
   const count = cart.reduce((s, x) => s + x.qty, 0);
+
   byId("cartCount").textContent = count;
 
   byId("cartLines").innerHTML = cart.length
@@ -278,6 +491,7 @@ function renderCart() {
             <div>
               <b>${p.name}</b>
               <small>${money(discounted(p.price))} each</small>
+
               <button class="remove-line" data-remove="${p.id}">
                 Remove
               </button>
@@ -298,8 +512,29 @@ function renderCart() {
   byId("cartSubtotal").textContent = money(t.subtotal);
   byId("cartDiscount").textContent = "−" + money(t.discount);
   byId("cartTotal").textContent = money(t.total);
+
   byId("checkoutButton").disabled = !cart.length;
 }
+
+function addToCart(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+
+  if (!p || p.price === null) return;
+
+  const item = cart.find(x => x.id === id);
+
+  if (item) {
+    item.qty++;
+  } else {
+    cart.push({ id, qty: 1 });
+  }
+
+  persist();
+}
+
+/* =====================================
+   CART DRAWER
+===================================== */
 
 function openCart() {
   document.body.classList.add("cart-open");
@@ -311,27 +546,58 @@ function closeCart() {
   byId("cartDrawer").setAttribute("aria-hidden", "true");
 }
 
+/* =====================================
+   PRODUCT GRID EVENTS
+===================================== */
+
 byId("productGrid").addEventListener("click", e => {
+
+  // Open product quick view
+  const view = e.target.closest("[data-view]");
+
+  if (view) {
+    openProductView(view.dataset.view);
+    return;
+  }
+
+  // Add product from normal product card
   const b = e.target.closest("[data-add]");
+
   if (!b) return;
 
   const id = b.dataset.add;
-  const p = PRODUCTS.find(x => x.id === id);
 
-  if (!p || p.price === null) return;
-
-  const item = cart.find(x => x.id === id);
-
-  if (item) item.qty++;
-  else cart.push({ id, qty: 1 });
-
-  persist();
+  addToCart(id);
 
   b.textContent = "Added ✓";
-  setTimeout(() => b.textContent = "Add to bag", 900);
+
+  setTimeout(() => {
+    b.textContent = "Add to bag";
+  }, 900);
 });
 
+/* =====================================
+   ADD TO CART FROM QUICK VIEW
+===================================== */
+
+quickView.addEventListener("click", e => {
+  const b = e.target.closest("[data-quick-add]");
+
+  if (!b) return;
+
+  const id = b.dataset.quickAdd;
+
+  addToCart(id);
+
+  b.textContent = "Added to bag ✓";
+});
+
+/* =====================================
+   CART LINE EVENTS
+===================================== */
+
 byId("cartLines").addEventListener("click", e => {
+
   const rm = e.target.closest("[data-remove]");
 
   if (rm) {
@@ -357,8 +623,13 @@ byId("cartLines").addEventListener("click", e => {
   }
 });
 
+/* =====================================
+   FILTERS
+===================================== */
+
 byId("filters").addEventListener("click", e => {
   const b = e.target.closest("[data-filter]");
+
   if (!b) return;
 
   activeFilter = b.dataset.filter;
@@ -370,11 +641,25 @@ byId("filters").addEventListener("click", e => {
   renderProducts();
 });
 
+/* =====================================
+   SEARCH
+===================================== */
+
 byId("searchInput").addEventListener("input", renderProducts);
 
+/* =====================================
+   CART BUTTONS
+===================================== */
+
 byId("cartTrigger").addEventListener("click", openCart);
+
 byId("closeCart").addEventListener("click", closeCart);
+
 byId("drawerBackdrop").addEventListener("click", closeCart);
+
+/* =====================================
+   CHECKOUT
+===================================== */
 
 byId("checkoutButton").addEventListener("click", () => {
   closeCart();
@@ -415,10 +700,15 @@ byId("checkoutForm").addEventListener("submit", async e => {
 
   } catch (err) {
     msg.textContent = err.message || "Something went wrong. Please try again.";
+
     button.disabled = false;
     button.textContent = "Pay securely with Paystack ↗";
   }
 });
+
+/* =====================================
+   NEWSLETTER
+===================================== */
 
 byId("newsletterForm").addEventListener("submit", e => {
   e.preventDefault();
@@ -429,6 +719,10 @@ byId("newsletterForm").addEventListener("submit", e => {
   e.currentTarget.reset();
 });
 
+/* =====================================
+   MOBILE MENU
+===================================== */
+
 byId("menuToggle").addEventListener("click", () => {
   const nav = byId("mainNav");
   const open = nav.classList.toggle("open");
@@ -436,7 +730,15 @@ byId("menuToggle").addEventListener("click", () => {
   byId("menuToggle").setAttribute("aria-expanded", String(open));
 });
 
+/* =====================================
+   CURRENT YEAR
+===================================== */
+
 byId("year").textContent = new Date().getFullYear();
+
+/* =====================================
+   INITIAL RENDER
+===================================== */
 
 renderProducts();
 renderCart();
