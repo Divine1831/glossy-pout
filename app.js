@@ -163,7 +163,7 @@ function discounted(price) {
 }
 
 /* =====================================
-   PRODUCT QUICK VIEW POP-UP
+   PRODUCT QUICK VIEW AND IMAGE ZOOM
 ===================================== */
 
 const quickViewStyle = document.createElement("style");
@@ -194,6 +194,18 @@ quickViewStyle.textContent = `
     object-fit: contain;
     background: #fff5f8;
     display: block;
+    cursor: zoom-in;
+    transition: transform .3s ease;
+    transform-origin: center center;
+  }
+
+  .quick-view-image.zoomed {
+    transform: scale(1.8);
+    cursor: zoom-out;
+  }
+
+  #quickViewDetails {
+    overflow: hidden;
   }
 
   .quick-view-content {
@@ -347,6 +359,13 @@ function openProductView(id) {
       </button>
     </div>
   `;
+
+  const productImage = byId("quickViewDetails")
+    .querySelector(".quick-view-image");
+
+  productImage.addEventListener("click", () => {
+    productImage.classList.toggle("zoomed");
+  });
 
   quickView.showModal();
 }
@@ -552,7 +571,6 @@ function closeCart() {
 
 byId("productGrid").addEventListener("click", e => {
 
-  // Open product quick view
   const view = e.target.closest("[data-view]");
 
   if (view) {
@@ -560,7 +578,6 @@ byId("productGrid").addEventListener("click", e => {
     return;
   }
 
-  // Add product from normal product card
   const b = e.target.closest("[data-add]");
 
   if (!b) return;
