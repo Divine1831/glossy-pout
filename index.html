@@ -6,23 +6,219 @@
   <meta name="theme-color" content="#24131d">
   <meta name="description" content="Glossy Pout — lip gloss, lip care and beauty essentials, proudly based in Benin City, Nigeria.">
   <title>Glossy Pout | Beauty in Every Layer</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
+
+  <style>
+    .header-actions {
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .notification-trigger {
+      position:relative;
+      border:1px solid #eadce2;
+      background:#fff;
+      color:#24131d;
+      border-radius:50%;
+      width:43px;
+      height:43px;
+      font-size:20px;
+      cursor:pointer;
+    }
+
+    .notification-count {
+      position:absolute;
+      top:-5px;
+      right:-5px;
+      background:#a52c60;
+      color:white;
+      border-radius:50%;
+      min-width:19px;
+      height:19px;
+      font-size:11px;
+      display:grid;
+      place-items:center;
+      padding:2px;
+    }
+
+    .notification-count[hidden] {
+      display:none;
+    }
+
+    .notification-dialog {
+      width:min(92%,520px);
+      max-height:85vh;
+      overflow:auto;
+      border:0;
+      border-radius:20px;
+      padding:25px;
+      color:#24131d;
+      background:#fffafc;
+      box-shadow:0 20px 70px #24131d30;
+    }
+
+    .notification-dialog::backdrop {
+      background:#170d14a8;
+    }
+
+    .notification-top {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+      margin-bottom:20px;
+    }
+
+    .notification-top h2 {
+      margin:0;
+      font-family:'Playfair Display',serif;
+    }
+
+    .notification-close {
+      border:0;
+      background:transparent;
+      font-size:28px;
+      cursor:pointer;
+      color:#24131d;
+    }
+
+    .notification-card {
+      padding:16px;
+      margin-bottom:12px;
+      background:#fff;
+      border:1px solid #f0dfe7;
+      border-radius:13px;
+    }
+
+    .notification-card h3 {
+      margin:0 0 7px;
+      font-size:16px;
+    }
+
+    .notification-card p {
+      margin:0;
+      line-height:1.6;
+      color:#68545f;
+      white-space:pre-wrap;
+      overflow-wrap:anywhere;
+    }
+
+    .notification-date {
+      display:block;
+      margin-top:10px;
+      font-size:12px;
+      color:#987d8a;
+    }
+
+    .notification-empty {
+      padding:25px 10px;
+      text-align:center;
+      color:#806b76;
+    }
+
+    .owner-area {
+      border-top:1px solid #eadce2;
+      margin-top:22px;
+      padding-top:18px;
+    }
+
+    .owner-area h3 {
+      margin-top:0;
+    }
+
+    .owner-area input,
+    .owner-area textarea {
+      width:100%;
+      box-sizing:border-box;
+      margin:7px 0 12px;
+      padding:12px;
+      border:1px solid #dfcbd5;
+      border-radius:9px;
+      font:inherit;
+    }
+
+    .owner-area textarea {
+      min-height:100px;
+      resize:vertical;
+    }
+
+    .owner-area button {
+      cursor:pointer;
+    }
+
+    .owner-login-button {
+      border:1px solid #a52c60;
+      background:transparent;
+      color:#a52c60;
+      padding:10px 15px;
+      border-radius:8px;
+      font:inherit;
+    }
+
+    .owner-status {
+      font-size:13px;
+      margin-top:10px;
+      color:#68545f;
+    }
+
+    .owner-delete {
+      margin-top:10px;
+      border:0;
+      background:#f9e9ef;
+      color:#a52c60;
+      padding:8px 12px;
+      border-radius:8px;
+      cursor:pointer;
+    }
+
+    .owner-hidden {
+      display:none;
+    }
+  </style>
 </head>
+
 <body>
-  <div class="announcement">A little extra shine — enjoy 10% off products with confirmed prices</div>
+
+  <div class="announcement">
+    A little extra shine — enjoy 10% off products with confirmed prices
+  </div>
+
   <header class="site-header">
-    <a class="brand" href="/" aria-label="Glossy Pout home"><span class="brand-mark">GP</span><span>GLOSSY <i>POUT</i><small>BEAUTY IN EVERY LAYER</small></span></a>
+
+    <a class="brand" href="/" aria-label="Glossy Pout home">
+      <span class="brand-mark">GP</span>
+      <span>GLOSSY <i>POUT</i><small>BEAUTY IN EVERY LAYER</small></span>
+    </a>
+
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+
     <nav id="mainNav">
-      <a href="#shop">Shop</a><a href="/about.html">Our Story</a><a href="#care">Lip Care</a><a href="#contact">Contact</a>
+      <a href="#shop">Shop</a>
+      <a href="/about.html">Our Story</a>
+      <a href="#care">Lip Care</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <button class="cart-trigger" id="cartTrigger" aria-label="Open shopping bag">Bag <span id="cartCount">0</span></button>
+
+    <div class="header-actions">
+      <button class="notification-trigger" id="notificationTrigger" aria-label="View notifications">
+        🔔
+        <span id="notificationCount" class="notification-count" hidden>0</span>
+      </button>
+
+      <button class="cart-trigger" id="cartTrigger" aria-label="Open shopping bag">
+        Bag <span id="cartCount">0</span>
+      </button>
+    </div>
+
   </header>
 
   <main>
+
     <section class="hero">
       <div class="hero-copy">
         <p class="eyebrow">MADE FOR YOUR KIND OF GLOW</p>
@@ -31,80 +227,442 @@
         <a class="button button-dark" href="#shop">Shop the collection <span>↗</span></a>
         <div class="hero-note"><span>✦</span> Proudly Nigerian <span>·</span> Benin City, Edo State</div>
       </div>
+
       <div class="hero-art" aria-label="Decorative beauty illustration">
-        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
-        <div class="lip-tube"><div class="tube-cap"></div><div class="tube-body"><span>GLOSSY<br>POUT</span><small>GLOW OIL</small></div></div>
+        <div class="art-orbit orbit-one"></div>
+        <div class="art-orbit orbit-two"></div>
+        <div class="lip-tube">
+          <div class="tube-cap"></div>
+          <div class="tube-body">
+            <span>GLOSSY<br>POUT</span>
+            <small>GLOW OIL</small>
+          </div>
+        </div>
         <div class="art-sticker sticker-top">THE GLOW<br>EDIT ✦</div>
         <div class="art-sticker sticker-bottom">LOVE YOUR<br>POUT</div>
       </div>
     </section>
 
     <section class="benefit-strip">
-      <div><b>01</b><span>Gloss that gets noticed</span></div><div><b>02</b><span>Care for everyday lips</span></div><div><b>03</b><span>Made with Nigerian love</span></div>
+      <div><b>01</b><span>Gloss that gets noticed</span></div>
+      <div><b>02</b><span>Care for everyday lips</span></div>
+      <div><b>03</b><span>Made with Nigerian love</span></div>
     </section>
 
     <section class="shop-section section-wrap" id="shop">
       <div class="section-heading">
-        <div><p class="eyebrow">THE GLOSSY POUT COLLECTION</p><h2>Find your <em>favourite.</em></h2></div>
+        <div>
+          <p class="eyebrow">THE GLOSSY POUT COLLECTION</p>
+          <h2>Find your <em>favourite.</em></h2>
+        </div>
         <p>Little essentials. Big main-character energy.</p>
       </div>
+
       <div class="shop-tools">
-        <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search products..." aria-label="Search products"></label>
+        <label class="search-box">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Search products..." aria-label="Search products">
+        </label>
+
         <div class="filters" id="filters">
-          <button class="filter active" data-filter="all">All</button><button class="filter" data-filter="gloss">Gloss</button><button class="filter" data-filter="care">Lip care</button><button class="filter" data-filter="tools">Tools</button><button class="filter" data-filter="liner">Liners</button>
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="gloss">Gloss</button>
+          <button class="filter" data-filter="care">Lip care</button>
+          <button class="filter" data-filter="tools">Tools</button>
+          <button class="filter" data-filter="liner">Liners</button>
         </div>
       </div>
+
       <div class="product-grid" id="productGrid" aria-live="polite"></div>
-      <p class="price-note">Prices are shown in Nigerian naira. The 10% offer is applied automatically where a confirmed price is available. Items marked “Price coming soon” cannot be checked out yet.</p>
+
+      <p class="price-note">
+        Prices are shown in Nigerian naira. The 10% offer is applied automatically where a confirmed price is available. Items marked “Price coming soon” cannot be checked out yet.
+      </p>
     </section>
 
     <section class="care-banner section-wrap" id="care">
-      <div class="care-symbol">✳</div><div><p class="eyebrow">A LITTLE SELF-CARE MOMENT</p><h2>Good lip days<br>start with <em>good care.</em></h2></div>
+      <div class="care-symbol">✳</div>
+      <div>
+        <p class="eyebrow">A LITTLE SELF-CARE MOMENT</p>
+        <h2>Good lip days<br>start with <em>good care.</em></h2>
+      </div>
       <p>Build your routine with gentle lip-care essentials and the finishing touch of your favourite Glossy Pout shine.</p>
     </section>
 
     <section class="story-preview section-wrap">
-      <div class="story-image"><div class="story-stamp">GLOSSY<br>POUT</div></div>
-      <div><p class="eyebrow">A BRAND WITH HEART</p><h2>Rooted in Benin.<br><em>Made to glow everywhere.</em></h2><p>Glossy Pout began in 2025 with a simple idea: create beautiful, accessible lip products that celebrate self-expression. We're growing one shade, one order and one happy customer at a time.</p><a class="text-link" href="/about.html">Get to know our story ↗</a></div>
+      <div class="story-image">
+        <div class="story-stamp">GLOSSY<br>POUT</div>
+      </div>
+      <div>
+        <p class="eyebrow">A BRAND WITH HEART</p>
+        <h2>Rooted in Benin.<br><em>Made to glow everywhere.</em></h2>
+        <p>Glossy Pout began in 2025 with a simple idea: create beautiful, accessible lip products that celebrate self-expression. We're growing one shade, one order and one happy customer at a time.</p>
+        <a class="text-link" href="/about.html">Get to know our story ↗</a>
+      </div>
     </section>
 
     <section class="newsletter section-wrap">
-      <p class="eyebrow">NOTES FROM THE GLOSS BAR</p><h2>Stay in the <em>glow.</em></h2><p>Get product news, new-shade updates and special offers.</p>
-      <form id="newsletterForm"><input type="email" id="newsletterEmail" placeholder="Your email address" required><button class="button button-dark" type="submit">Keep me posted ↗</button></form>
+      <p class="eyebrow">NOTES FROM THE GLOSS BAR</p>
+      <h2>Stay in the <em>glow.</em></h2>
+      <p>Get product news, new-shade updates and special offers.</p>
+      <form id="newsletterForm">
+        <input type="email" id="newsletterEmail" placeholder="Your email address" required>
+        <button class="button button-dark" type="submit">Keep me posted ↗</button>
+      </form>
       <p class="form-message" id="newsletterMessage" role="status"></p>
     </section>
+
   </main>
 
   <footer id="contact">
-    <div class="footer-main"><div><a class="brand brand-footer" href="/"><span class="brand-mark">GP</span><span>GLOSSY <i>POUT</i><small>BEAUTY IN EVERY LAYER</small></span></a><p>Little essentials. Big glow.</p></div>
-      <div><h3>Explore</h3><a href="#shop">Shop all</a><a href="/about.html">Our story</a></div>
-      <div><h3>Say hello</h3><a href="mailto:okohchristabel06@gmail.com">okohchristabel06@gmail.com</a><a href="tel:+2348110878047">+234 811 087 8047</a><span>Benin City, Edo State, Nigeria</span></div>
+    <div class="footer-main">
+      <div>
+        <a class="brand brand-footer" href="/">
+          <span class="brand-mark">GP</span>
+          <span>GLOSSY <i>POUT</i><small>BEAUTY IN EVERY LAYER</small></span>
+        </a>
+        <p>Little essentials. Big glow.</p>
+      </div>
+
+      <div>
+        <h3>Explore</h3>
+        <a href="#shop">Shop all</a>
+        <a href="/about.html">Our story</a>
+      </div>
+
+      <div>
+        <h3>Say hello</h3>
+        <a href="mailto:okohchristabel06@gmail.com">okohchristabel06@gmail.com</a>
+        <a href="tel:+2348110878047">+234 811 087 8047</a>
+        <span>Benin City, Edo State, Nigeria</span>
+      </div>
     </div>
-    <div class="footer-bottom">© <span id="year"></span> Glossy Pout. All rights reserved. <span>Made with care in Nigeria ♡</span></div>
+
+    <div class="footer-bottom">
+      © <span id="year"></span> Glossy Pout. All rights reserved.
+      <span>Made with care in Nigeria ♡</span>
+    </div>
   </footer>
 
+  <!-- CUSTOMER NOTIFICATIONS -->
+  <dialog id="notificationDialog" class="notification-dialog">
+    <div class="notification-top">
+      <div>
+        <p class="eyebrow">THE LATEST FROM GLOSSY POUT</p>
+        <h2>Notifications 🔔</h2>
+      </div>
+      <button class="notification-close" id="closeNotifications" aria-label="Close">×</button>
+    </div>
+
+    <div id="notificationList">
+      <p class="notification-empty">Loading announcements...</p>
+    </div>
+
+    <!-- OWNER CONTROLS -->
+    <div class="owner-area">
+      <h3>Owner access</h3>
+
+      <button id="showOwnerLogin" class="owner-login-button">
+        Owner login
+      </button>
+
+      <div id="ownerPanel" class="owner-hidden">
+
+        <label for="ownerToken">Private owner token</label>
+        <input
+          type="password"
+          id="ownerToken"
+          placeholder="Enter your private token"
+          autocomplete="off"
+        >
+
+        <label for="notificationTitle">Notification title</label>
+        <input
+          type="text"
+          id="notificationTitle"
+          maxlength="100"
+          placeholder="e.g. New collection available!"
+        >
+
+        <label for="notificationMessageInput">Message</label>
+        <textarea
+          id="notificationMessageInput"
+          maxlength="1000"
+          placeholder="Write your announcement..."
+        ></textarea>
+
+        <button class="button button-dark" id="publishNotification">
+          Publish notification
+        </button>
+
+        <p class="owner-status" id="ownerStatus" role="status"></p>
+
+        <div id="ownerNotificationList"></div>
+
+        <button class="owner-login-button" id="ownerLogout">
+          Close owner controls
+        </button>
+
+      </div>
+    </div>
+  </dialog>
+
+  <!-- SHOPPING BAG BACKDROP -->
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- SHOPPING BAG -->
   <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping bag" aria-hidden="true">
-    <div class="drawer-head"><div><p class="eyebrow">YOUR SELECTION</p><h2>Shopping bag</h2></div><button id="closeCart" class="icon-button" aria-label="Close bag">×</button></div>
+    <div class="drawer-head">
+      <div>
+        <p class="eyebrow">YOUR SELECTION</p>
+        <h2>Shopping bag</h2>
+      </div>
+      <button id="closeCart" class="icon-button" aria-label="Close bag">×</button>
+    </div>
+
     <div class="cart-lines" id="cartLines"></div>
-    <div class="cart-summary"><div><span>Subtotal</span><b id="cartSubtotal">₦0</b></div><div><span>10% discount</span><b id="cartDiscount">−₦0</b></div><div class="total-line"><span>Total</span><b id="cartTotal">₦0</b></div></div>
-    <button class="button button-dark checkout-button" id="checkoutButton" disabled>Continue to checkout ↗</button>
-    <p class="drawer-small">Secure payment is handled by Paystack. We never ask for your card PIN or OTP on this website.</p>
+
+    <div class="cart-summary">
+      <div><span>Subtotal</span><b id="cartSubtotal">₦0</b></div>
+      <div><span>10% discount</span><b id="cartDiscount">−₦0</b></div>
+      <div class="total-line"><span>Total</span><b id="cartTotal">₦0</b></div>
+    </div>
+
+    <button class="button button-dark checkout-button" id="checkoutButton" disabled>
+      Continue to checkout ↗
+    </button>
+
+    <p class="drawer-small">
+      Secure payment is handled by Paystack. We never ask for your card PIN or OTP on this website.
+    </p>
   </aside>
 
+  <!-- CHECKOUT -->
   <dialog id="checkoutDialog" class="checkout-dialog">
     <form id="checkoutForm" class="checkout-form">
       <button type="button" class="dialog-close" id="closeCheckout" aria-label="Close">×</button>
-      <p class="eyebrow">ALMOST YOURS</p><h2>Delivery details</h2><p class="dialog-intro">Enter your details. You'll be redirected to Paystack to complete payment securely.</p>
-      <label>Full name<input name="customer_name" autocomplete="name" required maxlength="100"></label>
-      <label>Email address<input name="customer_email" type="email" autocomplete="email" required maxlength="160"></label>
-      <label>Phone number<input name="customer_phone" type="tel" autocomplete="tel" required maxlength="25" placeholder="e.g. 08012345678"></label>
-      <label>Delivery address<textarea name="delivery_address" autocomplete="street-address" required maxlength="500" rows="3"></textarea></label>
+
+      <p class="eyebrow">ALMOST YOURS</p>
+      <h2>Delivery details</h2>
+
+      <p class="dialog-intro">
+        Enter your details. You'll be redirected to Paystack to complete payment securely.
+      </p>
+
+      <label>Full name
+        <input name="customer_name" autocomplete="name" required maxlength="100">
+      </label>
+
+      <label>Email address
+        <input name="customer_email" type="email" autocomplete="email" required maxlength="160">
+      </label>
+
+      <label>Phone number
+        <input name="customer_phone" type="tel" autocomplete="tel" required maxlength="25" placeholder="e.g. 08012345678">
+      </label>
+
+      <label>Delivery address
+        <textarea name="delivery_address" autocomplete="street-address" required maxlength="500" rows="3"></textarea>
+      </label>
+
       <p id="checkoutMessage" class="form-message" role="status"></p>
-      <button class="button button-dark" id="payButton" type="submit">Pay securely with Paystack ↗</button>
-      <p class="drawer-small">Payment is only confirmed after the server verifies it with Paystack.</p>
+
+      <button class="button button-dark" id="payButton" type="submit">
+        Pay securely with Paystack ↗
+      </button>
+
+      <p class="drawer-small">
+        Payment is only confirmed after the server verifies it with Paystack.
+      </p>
     </form>
   </dialog>
+
+  <!-- NOTIFICATION FUNCTIONALITY -->
+  <script>
+    (() => {
+      const bell = document.getElementById("notificationTrigger");
+      const dialog = document.getElementById("notificationDialog");
+      const closeButton = document.getElementById("closeNotifications");
+      const list = document.getElementById("notificationList");
+      const count = document.getElementById("notificationCount");
+
+      const ownerLogin = document.getElementById("showOwnerLogin");
+      const ownerPanel = document.getElementById("ownerPanel");
+      const ownerToken = document.getElementById("ownerToken");
+      const ownerTitle = document.getElementById("notificationTitle");
+      const ownerMessage = document.getElementById("notificationMessageInput");
+      const publishButton = document.getElementById("publishNotification");
+      const ownerStatus = document.getElementById("ownerStatus");
+      const ownerList = document.getElementById("ownerNotificationList");
+      const logoutButton = document.getElementById("ownerLogout");
+
+      let notifications = [];
+
+      async function loadNotifications() {
+        list.innerHTML = '<p class="notification-empty">Loading announcements...</p>';
+
+        try {
+          const response = await fetch("/api/notifications", {
+            method: "GET",
+            cache: "no-store"
+          });
+
+          if (!response.ok) throw new Error("Unable to load notifications.");
+
+          const data = await response.json();
+          notifications = Array.isArray(data.notifications)
+            ? data.notifications
+            : [];
+
+          renderNotifications();
+
+        } catch (error) {
+          list.innerHTML = '<p class="notification-empty">Notifications are temporarily unavailable. Please try again later.</p>';
+          count.hidden = true;
+        }
+      }
+
+      function renderNotifications() {
+        count.textContent = notifications.length > 99
+          ? "99+"
+          : String(notifications.length);
+
+        count.hidden = notifications.length === 0;
+
+        if (!notifications.length) {
+          list.innerHTML = '<p class="notification-empty">No announcements yet. Check back soon! ♡</p>';
+          renderOwnerList();
+          return;
+        }
+
+        list.innerHTML = "";
+
+        notifications.forEach(notification => {
+          const card = document.createElement("article");
+          card.className = "notification-card";
+
+          const heading = document.createElement("h3");
+          heading.textContent = notification.title;
+
+          const message = document.createElement("p");
+          message.textContent = notification.message;
+
+          const date = document.createElement("span");
+          date.className = "notification-date";
+          date.textContent = new Date(notification.created_at).toLocaleString();
+
+          card.append(heading, message, date);
+          list.appendChild(card);
+        });
+
+        renderOwnerList();
+      }
+
+      function renderOwnerList() {
+        ownerList.innerHTML = "";
+
+        notifications.forEach(notification => {
+          const card = document.createElement("div");
+          card.className = "notification-card";
+
+          const heading = document.createElement("h3");
+          heading.textContent = notification.title;
+
+          const remove = document.createElement("button");
+          remove.className = "owner-delete";
+          remove.textContent = "Delete notification";
+
+          remove.addEventListener("click", async () => {
+            if (!confirm("Delete this notification?")) return;
+
+            await ownerRequest("DELETE", {
+              id: notification.id
+            });
+          });
+
+          card.append(heading, remove);
+          ownerList.appendChild(card);
+        });
+      }
+
+      async function ownerRequest(method, body) {
+        const token = ownerToken.value.trim();
+
+        if (!token) {
+          ownerStatus.textContent = "Enter your private owner token first.";
+          return;
+        }
+
+        ownerStatus.textContent = "Please wait...";
+
+        try {
+          const response = await fetch("/api/notifications", {
+            method,
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(body)
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result.error || "Request failed.");
+          }
+
+          ownerStatus.textContent = method === "POST"
+            ? "Your announcement has been published!"
+            : "Notification deleted.";
+
+          if (method === "POST") {
+            ownerTitle.value = "";
+            ownerMessage.value = "";
+          }
+
+          await loadNotifications();
+
+        } catch (error) {
+          ownerStatus.textContent = error.message;
+        }
+      }
+
+      bell.addEventListener("click", () => {
+        dialog.showModal();
+        loadNotifications();
+      });
+
+      closeButton.addEventListener("click", () => dialog.close());
+
+      dialog.addEventListener("click", event => {
+        if (event.target === dialog) dialog.close();
+      });
+
+      ownerLogin.addEventListener("click", () => {
+        ownerPanel.classList.remove("owner-hidden");
+        ownerLogin.classList.add("owner-hidden");
+      });
+
+      publishButton.addEventListener("click", () => {
+        ownerRequest("POST", {
+          title: ownerTitle.value,
+          message: ownerMessage.value
+        });
+      });
+
+      logoutButton.addEventListener("click", () => {
+        ownerToken.value = "";
+        ownerTitle.value = "";
+        ownerMessage.value = "";
+        ownerStatus.textContent = "";
+        ownerPanel.classList.add("owner-hidden");
+        ownerLogin.classList.remove("owner-hidden");
+      });
+
+    })();
+  </script>
+
   <script src="/app.js" defer></script>
+
 </body>
 </html>
