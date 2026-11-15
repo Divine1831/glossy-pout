@@ -355,7 +355,7 @@ function openProductView(id) {
         type="button"
         data-quick-add="${p.id}"
       >
-        Add to bag
+        Add to cart
       </button>
     </div>
   `;
@@ -457,7 +457,7 @@ function renderProducts() {
                 data-add="${p.id}"
                 ${available ? "" : "disabled"}
               >
-                ${available ? "Add to bag" : "Coming soon"}
+                ${available ? "Add to cart" : "Coming soon"}
               </button>
             </div>
 
@@ -524,7 +524,7 @@ function renderCart() {
           </div>
         `;
       }).join("")
-    : '<p class="empty-cart">Your bag is waiting for a little shine.</p>';
+    : '<p class="empty-cart">Your cart is waiting for a little shine.</p>';
 
   const t = totals();
 
@@ -589,7 +589,7 @@ byId("productGrid").addEventListener("click", e => {
   b.textContent = "Added ✓";
 
   setTimeout(() => {
-    b.textContent = "Add to bag";
+    b.textContent = "Add to cart";
   }, 900);
 });
 
@@ -606,7 +606,7 @@ quickView.addEventListener("click", e => {
 
   addToCart(id);
 
-  b.textContent = "Added to bag ✓";
+  b.textContent = "Added to cart ✓";
 });
 
 /* =====================================
