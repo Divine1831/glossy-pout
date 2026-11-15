@@ -6,7 +6,7 @@ const PRODUCTS = [
     kind: "balm",
     price: 1500,
     desc: "Everyday lip care",
-    image: "https://drive.google.com/uc?export=view&id=1MncZOaldo6wVPgB35RSHegO9WkrOwSpN"
+    image: "https://drive.google.com/thumbnail?id=1MncZOaldo6wVPgB35RSHegO9WkrOwSpN&sz=w1000"
   },
   {
     id: "cherry-pop",
@@ -24,7 +24,7 @@ const PRODUCTS = [
     kind: "gloss",
     price: 3000,
     desc: "A soft pink lip gloss",
-    image: "https://drive.google.com/uc?export=view&id=1UXIzZa5Y6hMhDGvf09AMS7e02sk5HCCE"
+    image: "https://drive.google.com/thumbnail?id=1UXIzZa5Y6hMhDGvf09AMS7e02sk5HCCE&sz=w1000"
   },
   {
     id: "mystic-glow",
@@ -33,7 +33,7 @@ const PRODUCTS = [
     kind: "gloss",
     price: 3000,
     desc: "Colour-changing lip gloss",
-    image: "https://drive.google.com/uc?export=view&id=1JBi8jnnfVecCypWUAI2OfAf4nOepvcYT"
+    image: "https://drive.google.com/thumbnail?id=1JBi8jnnfVecCypWUAI2OfAf4nOepvcYT&sz=w1000"
   },
   {
     id: "peach-perfect",
@@ -42,7 +42,7 @@ const PRODUCTS = [
     kind: "gloss",
     price: 3000,
     desc: "A peachy nude lip gloss",
-    image: "https://drive.google.com/uc?export=view&id=1ZrUW2i8BZ9cCG0pbwfo9NJOZ29cb8cf5"
+    image: "https://drive.google.com/thumbnail?id=1ZrUW2i8BZ9cCG0pbwfo9NJOZ29cb8cf5&sz=w1000"
   },
   {
     id: "lipcare-kit",
@@ -51,7 +51,7 @@ const PRODUCTS = [
     kind: "balm",
     price: 3000,
     desc: "A little care bundle",
-    image: "https://drive.google.com/uc?export=view&id=1BeLzFGNgsSPn0rqMqln2mo-ernIzN96d"
+    image: "https://drive.google.com/thumbnail?id=1BeLzFGNgsSPn0rqMqln2mo-ernIzN96d&sz=w1000"
   },
   {
     id: "clear-lipgloss",
@@ -60,7 +60,7 @@ const PRODUCTS = [
     kind: "gloss",
     price: 2500,
     desc: "A clear glossy finish",
-    image: "https://drive.google.com/uc?export=view&id=1LEAVRbTRGy2ZzyVGzB1UV1u1BAykK9pN"
+    image: "https://drive.google.com/thumbnail?id=1LEAVRbTRGy2ZzyVGzB1UV1u1BAykK9pN&sz=w1000"
   },
   {
     id: "lip-scrub",
@@ -69,7 +69,7 @@ const PRODUCTS = [
     kind: "scrub",
     price: 1500,
     desc: "A lip-care essential",
-    image: "https://drive.google.com/uc?export=view&id=1-FJzzBqAiNgpQUyKTNeW62h6esowxXIL"
+    image: "https://drive.google.com/thumbnail?id=1-FJzzBqAiNgpQUyKTNeW62h6esowxXIL&sz=w1000"
   },
   {
     id: "starlight",
@@ -78,7 +78,7 @@ const PRODUCTS = [
     kind: "gloss",
     price: 3000,
     desc: "A glittery lip gloss",
-    image: "https://drive.google.com/uc?export=view&id=1f_bFx8Ia3Ugc13OKS4lYwXNxqgvsIJ3u"
+    image: "https://drive.google.com/thumbnail?id=1f_bFx8Ia3Ugc13OKS4lYwXNxqgvsIJ3u&sz=w1000"
   },
   {
     id: "choco-royale",
@@ -87,7 +87,7 @@ const PRODUCTS = [
     kind: "gloss",
     price: 3000,
     desc: "A rich brown lip gloss",
-    image: "https://drive.google.com/uc?export=view&id=1-uSs_jhNr7AkKuBiqtkRoWlPwXeRBw5g"
+    image: "https://drive.google.com/thumbnail?id=1-uSs_jhNr7AkKuBiqtkRoWlPwXeRBw5g&sz=w1000"
   },
   {
     id: "pink-lip-balm",
@@ -96,7 +96,7 @@ const PRODUCTS = [
     kind: "balm",
     price: 3000,
     desc: "A touch of pink care",
-    image: "https://drive.google.com/uc?export=view&id=1b8a5isC9p2cZzb1b-kqvYZ5UZshoq8Or"
+    image: "https://drive.google.com/thumbnail?id=1b8a5isC9p2cZzb1b-kqvYZ5UZshoq8Or&sz=w1000"
   },
   {
     id: "lip-brush",
@@ -105,7 +105,7 @@ const PRODUCTS = [
     kind: "tool",
     price: 3000,
     desc: "A handy lip tool",
-    image: "https://drive.google.com/uc?export=view&id=1PKuWCqYOT9RVLw4Ti6yBr2348wJjPV7L"
+    image: "https://drive.google.com/thumbnail?id=1PKuWCqYOT9RVLw4Ti6yBr2348wJjPV7L&sz=w1000"
   },
   {
     id: "black-lip-liner",
@@ -114,7 +114,7 @@ const PRODUCTS = [
     kind: "liner",
     price: 1500,
     desc: "Define your look",
-    image: "https://drive.google.com/uc?export=view&id=1BhtYq6kqAjct1jQoFqA093el5ZUi70BN"
+    image: "https://drive.google.com/thumbnail?id=1BhtYq6kqAjct1jQoFqA093el5ZUi70BN&sz=w1000"
   },
   {
     id: "brown-lip-liner",
@@ -123,7 +123,7 @@ const PRODUCTS = [
     kind: "liner",
     price: 1500,
     desc: "Define your look",
-    image: "https://drive.google.com/uc?export=view&id=1J4nlfgTb832ron0wyqq7hWZnGRrQiH9-"
+    image: "https://drive.google.com/thumbnail?id=1J4nlfgTb832ron0wyqq7hWZnGRrQiH9-&sz=w1000"
   },
   {
     id: "burgundy-lip-liner",
@@ -132,9 +132,10 @@ const PRODUCTS = [
     kind: "liner",
     price: 1500,
     desc: "Define your look",
-    image: "https://drive.google.com/uc?export=view&id=16ahT3Y-jiOaxzUUHA8BfJe5ZhjpagOUK"
+    image: "https://drive.google.com/thumbnail?id=16ahT3Y-jiOaxzUUHA8BfJe5ZhjpagOUK&sz=w1000"
   }
 ];
+
 
 const DISCOUNT = 0.10;
 const money = n => new Intl.NumberFormat("en-NG", {
