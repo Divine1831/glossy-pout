@@ -34,17 +34,20 @@
 
     .notification-count {
       position:absolute;
-      top:-5px;
-      right:-5px;
-      background:#a52c60;
-      color:white;
-      border-radius:50%;
-      min-width:19px;
-      height:19px;
-      font-size:11px;
+      top:-6px;
+      right:-6px;
+      min-width:21px;
+      height:21px;
+      padding:0 5px;
       display:grid;
       place-items:center;
-      padding:2px;
+      border-radius:50%;
+      background:#e32636;
+      color:#fff;
+      border:2px solid #fff;
+      font-size:11px;
+      font-weight:700;
+      box-shadow:0 2px 8px rgba(227,38,54,.35);
     }
 
     .notification-count[hidden] {
@@ -180,6 +183,17 @@
     .owner-hidden {
       display:none;
     }
+
+    @media (max-width:480px) {
+      .header-actions {
+        gap:8px;
+      }
+
+      .notification-trigger {
+        width:40px;
+        height:40px;
+      }
+    }
   </style>
 </head>
 
@@ -208,7 +222,7 @@
     <div class="header-actions">
       <button class="notification-trigger" id="notificationTrigger" aria-label="View notifications">
         🔔
-        <span id="notificationCount" class="notification-count" hidden>0</span>
+        <span id="notificationCount" class="notification-count" hidden aria-live="polite">0</span>
       </button>
 
       <button class="cart-trigger" id="cartTrigger" aria-label="Open shopping cart">
@@ -497,41 +511,115 @@
       const ownerList = document.getElementById("ownerNotificationList");
       const logoutButton = document.getElementById("ownerLogout");
 
+      const STORAGE_KEY = "glossyPoutSeenNotifications";
+
       let notifications = [];
+      let seenIds = new Set();
+      let firstLoad = true;
+
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        if (saved !== null) {
+          const parsed = JSON.parse(saved);
+
+          if (Array.isArray(parsed)) {
+            seenIds = new Set(parsed.map(String));
+          }
+        }
+      } catch (error) {
+        console.warn("Could not read notification history.");
+      }
+
+      function saveSeenNotifications() {
+        try {
+          localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify([...seenIds])
+          );
+        } catch (error) {
+          console.warn("Could not save notification history.");
+        }
+      }
+
+      function updateBadge() {
+        const unread = notifications.filter(
+          item => !seenIds.has(String(item.id))
+        ).length;
+
+        count.textContent = unread > 99 ? "99+" : String(unread);
+        count.hidden = unread === 0;
+
+        bell.setAttribute(
+          "aria-label",
+          unread > 0
+            ? `View notifications, ${unread} unread`
+            : "View notifications"
+        );
+      }
+
+      function markNotificationsAsRead() {
+        notifications.forEach(item => {
+          seenIds.add(String(item.id));
+        });
+
+        saveSeenNotifications();
+        updateBadge();
+      }
 
       async function loadNotifications() {
-        list.innerHTML = '<p class="notification-empty">Loading announcements...</p>';
-
         try {
           const response = await fetch("/api/notifications", {
             method: "GET",
             cache: "no-store"
           });
 
-          if (!response.ok) throw new Error("Unable to load notifications.");
+          if (!response.ok) {
+            throw new Error("Unable to load notifications.");
+          }
 
           const data = await response.json();
+
           notifications = Array.isArray(data.notifications)
             ? data.notifications
             : [];
 
+          if (firstLoad) {
+            const saved = localStorage.getItem(STORAGE_KEY);
+
+            // First visit: existing announcements are not treated as new.
+            if (saved === null) {
+              markNotificationsAsRead();
+            }
+
+            firstLoad = false;
+          }
+
+          // If the customer is viewing the notification panel,
+          // newly received announcements are immediately marked read.
+          if (dialog.open) {
+            markNotificationsAsRead();
+          } else {
+            updateBadge();
+          }
+
           renderNotifications();
 
         } catch (error) {
-          list.innerHTML = '<p class="notification-empty">Notifications are temporarily unavailable. Please try again later.</p>';
-          count.hidden = true;
+          console.error("Notification loading failed:", error);
+
+          if (firstLoad) {
+            list.innerHTML =
+              '<p class="notification-empty">Notifications are temporarily unavailable. Please try again later.</p>';
+          }
         }
       }
 
       function renderNotifications() {
-        count.textContent = notifications.length > 99
-          ? "99+"
-          : String(notifications.length);
-
-        count.hidden = notifications.length === 0;
-
         if (!notifications.length) {
-          list.innerHTML = '<p class="notification-empty">No announcements yet. Check back soon! ♡</p>';
+          list.innerHTML =
+            '<p class="notification-empty">No announcements yet. Check back soon! ♡</p>';
+
           renderOwnerList();
           return;
         }
@@ -543,14 +631,19 @@
           card.className = "notification-card";
 
           const heading = document.createElement("h3");
-          heading.textContent = notification.title;
+          heading.textContent = notification.title || "Announcement";
 
           const message = document.createElement("p");
-          message.textContent = notification.message;
+          message.textContent = notification.message || "";
 
           const date = document.createElement("span");
           date.className = "notification-date";
-          date.textContent = new Date(notification.created_at).toLocaleString();
+
+          const created = new Date(notification.created_at);
+
+          date.textContent = Number.isNaN(created.getTime())
+            ? ""
+            : created.toLocaleString();
 
           card.append(heading, message, date);
           list.appendChild(card);
@@ -567,7 +660,7 @@
           card.className = "notification-card";
 
           const heading = document.createElement("h3");
-          heading.textContent = notification.title;
+          heading.textContent = notification.title || "Announcement";
 
           const remove = document.createElement("button");
           remove.className = "owner-delete";
@@ -590,7 +683,8 @@
         const token = ownerToken.value.trim();
 
         if (!token) {
-          ownerStatus.textContent = "Enter your private owner token first.";
+          ownerStatus.textContent =
+            "Enter your private owner token first.";
           return;
         }
 
@@ -628,15 +722,23 @@
         }
       }
 
-      bell.addEventListener("click", () => {
+      bell.addEventListener("click", async () => {
         dialog.showModal();
-        loadNotifications();
+
+        // Mark the currently loaded announcements as read.
+        markNotificationsAsRead();
+
+        await loadNotifications();
       });
 
-      closeButton.addEventListener("click", () => dialog.close());
+      closeButton.addEventListener("click", () => {
+        dialog.close();
+      });
 
       dialog.addEventListener("click", event => {
-        if (event.target === dialog) dialog.close();
+        if (event.target === dialog) {
+          dialog.close();
+        }
       });
 
       ownerLogin.addEventListener("click", () => {
@@ -656,9 +758,16 @@
         ownerTitle.value = "";
         ownerMessage.value = "";
         ownerStatus.textContent = "";
+
         ownerPanel.classList.add("owner-hidden");
         ownerLogin.classList.remove("owner-hidden");
       });
+
+      // Check for new announcements immediately.
+      loadNotifications();
+
+      // Automatically check every 15 seconds.
+      setInterval(loadNotifications, 15000);
 
     })();
   </script>
