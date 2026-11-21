@@ -1,4 +1,3 @@
-
 const PRODUCTS = [
   {
     id: "moisturizing-lip-balm",
@@ -6,7 +5,9 @@ const PRODUCTS = [
     type: "care",
     kind: "balm",
     price: 2000,
-    desc: "Everyday lip care",
+    swatch: "#f4c6d0",
+    badge: "Daily Essential",
+    desc: "Deeply hydrating everyday lip balm for soft, cushiony lips.",
     image: "https://drive.google.com/thumbnail?id=1MncZOaldo6wVPgB35RSHegO9WkrOwSpN&sz=w1000"
   },
   {
@@ -15,7 +16,9 @@ const PRODUCTS = [
     type: "gloss",
     kind: "gloss",
     price: 3000,
-    desc: "A bold red lip gloss",
+    swatch: "#c81d38",
+    badge: "Bestseller",
+    desc: "A bold, juicy cherry-red lip gloss with high-glass shine.",
     image: "https://drive.google.com/thumbnail?id=1ErqSBrclazr4dqiYbOJKEtTspC2A7lt7&sz=w1000"
   },
   {
@@ -24,7 +27,8 @@ const PRODUCTS = [
     type: "gloss",
     kind: "gloss",
     price: 3000,
-    desc: "A soft pink lip gloss",
+    swatch: "#f39eb6",
+    desc: "A dreamy soft-pink lip gloss for an effortless plush pout.",
     image: "https://drive.google.com/thumbnail?id=1UXIzZa5Y6hMhDGvf09AMS7e02sk5HCCE&sz=w1000"
   },
   {
@@ -33,7 +37,9 @@ const PRODUCTS = [
     type: "gloss",
     kind: "gloss",
     price: 3000,
-    desc: "Colour-changing lip gloss",
+    swatch: "#e77aa8",
+    badge: "Fan Favourite",
+    desc: "pH-reactive colour-changing gloss that adapts to your unique pink.",
     image: "https://drive.google.com/thumbnail?id=1JBi8jnnfVecCypWUAI2OfAf4nOepvcYT&sz=w1000"
   },
   {
@@ -42,7 +48,8 @@ const PRODUCTS = [
     type: "gloss",
     kind: "gloss",
     price: 3000,
-    desc: "A peachy nude lip gloss",
+    swatch: "#e5987e",
+    desc: "A warm peachy-nude lip gloss that flatters every skin tone.",
     image: "https://drive.google.com/thumbnail?id=1ZrUW2i8BZ9cCG0pbwfo9NJOZ29cb8cf5&sz=w1000"
   },
   {
@@ -51,7 +58,9 @@ const PRODUCTS = [
     type: "gloss",
     kind: "gloss",
     price: 3000,
-    desc: "A beautiful nude lip gloss",
+    swatch: "#cfa08e",
+    badge: "Bestseller",
+    desc: "A silky, flattering neutral nude lip gloss for everyday glam.",
     image: "/images/bare-essence.jpg"
   },
   {
@@ -60,7 +69,9 @@ const PRODUCTS = [
     type: "care",
     kind: "balm",
     price: 3000,
-    desc: "A little care bundle",
+    swatch: "#e5a3b5",
+    badge: "Value Set",
+    desc: "A complete pocket lip-care bundle to prep, soothe, and nourish.",
     image: "https://drive.google.com/thumbnail?id=1BeLzFGNgsSPn0rqMqln2mo-ernIzN96d&sz=w1000"
   },
   {
@@ -69,7 +80,9 @@ const PRODUCTS = [
     type: "gloss",
     kind: "gloss",
     price: 3000,
-    desc: "A clear glossy finish",
+    swatch: "#f7eef1",
+    badge: "Must-Have",
+    desc: "Crystal-clear mirror glaze—wear solo or layered over any liner.",
     image: "https://drive.google.com/thumbnail?id=1LEAVRbTRGy2ZzyVGzB1UV1u1BAykK9pN&sz=w1000"
   },
   {
@@ -78,7 +91,8 @@ const PRODUCTS = [
     type: "care",
     kind: "scrub",
     price: 1500,
-    desc: "A lip-care essential",
+    swatch: "#d99b8c",
+    desc: "Gentle sugar exfoliator that buffs away dryness for smooth lips.",
     image: "https://drive.google.com/thumbnail?id=1-FJzzBqAiNgpQUyKTNeW62h6esowxXIL&sz=w1000"
   },
   {
@@ -87,7 +101,8 @@ const PRODUCTS = [
     type: "gloss",
     kind: "gloss",
     price: 3000,
-    desc: "A glittery lip gloss",
+    swatch: "#f2d5df",
+    desc: "Micro-shimmer glittery lip gloss that catches every light.",
     image: "https://drive.google.com/thumbnail?id=1f_bFx8Ia3Ugc13OKS4lYwXNxqgvsIJ3u&sz=w1000"
   },
   {
@@ -96,7 +111,9 @@ const PRODUCTS = [
     type: "gloss",
     kind: "gloss",
     price: 3000,
-    desc: "A rich brown lip gloss",
+    swatch: "#6b3a2e",
+    badge: "Bestseller",
+    desc: "A rich, decadent cocoa-brown gloss with a luscious glaze.",
     image: "https://drive.google.com/thumbnail?id=1-uSs_jhNr7AkKuBiqtkRoWlPwXeRBw5g&sz=w1000"
   },
   {
@@ -105,7 +122,8 @@ const PRODUCTS = [
     type: "care",
     kind: "balm",
     price: 3000,
-    desc: "A touch of pink care",
+    swatch: "#ee88a7",
+    desc: "Nourishing moisture treatment with a soft rosy tint.",
     image: "https://drive.google.com/thumbnail?id=1b8a5isC9p2cZzb1b-kqvYZ5UZshoq8Or&sz=w1000"
   },
   {
@@ -114,7 +132,8 @@ const PRODUCTS = [
     type: "tools",
     kind: "tool",
     price: 500,
-    desc: "A handy lip tool",
+    swatch: "#a34d6a",
+    desc: "Precision applicator tool for mess-free gloss, balm, and scrub.",
     image: "https://drive.google.com/thumbnail?id=1PKuWCqYOT9RVLw4Ti6yBr2348wJjPV7L&sz=w1000"
   },
   {
@@ -123,7 +142,8 @@ const PRODUCTS = [
     type: "liner",
     kind: "liner",
     price: 1200,
-    desc: "Define your look",
+    swatch: "#1c1619",
+    desc: "Creamy, high-pigment black pencil for bold ombré lip combos.",
     image: "https://drive.google.com/thumbnail?id=1BhtYq6kqAjct1jQoFqA093el5ZUi70BN&sz=w1000"
   },
   {
@@ -132,7 +152,9 @@ const PRODUCTS = [
     type: "liner",
     kind: "liner",
     price: 1200,
-    desc: "Define your look",
+    swatch: "#5a3226",
+    badge: "Bestseller",
+    desc: "Rich espresso-brown liner—the ultimate pairing for nude glosses.",
     image: "https://drive.google.com/thumbnail?id=1J4nlfgTb832ron0wyqq7hWZnGRrQiH9-&sz=w1000"
   },
   {
@@ -141,12 +163,16 @@ const PRODUCTS = [
     type: "liner",
     kind: "liner",
     price: 1200,
-    desc: "Define your look",
+    swatch: "#751f37",
+    desc: "Deep berry-wine liner to sculpt and define your pout.",
     image: "https://drive.google.com/thumbnail?id=16ahT3Y-jiOaxzUUHA8BfJe5ZhjpagOUK&sz=w1000"
   }
 ];
 
 const DISCOUNT = 0.10;
+const CART_KEY = "glossyPoutCart";
+const WISH_KEY = "glossyPoutWishlist";
+const NOTIF_SEEN_KEY = "glossyPoutSeenNotifications";
 
 const money = n => new Intl.NumberFormat("en-NG", {
   style: "currency",
@@ -155,550 +181,448 @@ const money = n => new Intl.NumberFormat("en-NG", {
 }).format(n);
 
 const byId = id => document.getElementById(id);
+const discounted = price => Math.round(price * (1 - DISCOUNT));
 
 let activeFilter = "all";
-let cart = JSON.parse(localStorage.getItem("glossyPoutCart") || "[]");
+let activeSort = "featured";
 
-const safeCart = () => cart.filter(x =>
-  PRODUCTS.some(p => p.id === x.id) &&
-  Number.isInteger(x.qty) &&
-  x.qty > 0
-);
+let cart = [];
+let wishlist = [];
 
-cart = safeCart();
+try {
+  const rawCart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+  if (Array.isArray(rawCart)) {
+    cart = rawCart.filter(x => PRODUCTS.some(p => p.id === x.id) && Number.isInteger(x.qty) && x.qty > 0);
+  }
+  const rawWish = JSON.parse(localStorage.getItem(WISH_KEY) || "[]");
+  if (Array.isArray(rawWish)) {
+    wishlist = rawWish.filter(id => PRODUCTS.some(p => p.id === id));
+  }
+} catch (_) {}
 
-function discounted(price) {
-  return Math.round(price * (1 - DISCOUNT));
+/* =====================================
+   TOAST HELPER
+===================================== */
+let toastTimer = null;
+function showToast(message) {
+  const el = byId("toastBanner");
+  if (!el) return;
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
 }
 
 /* =====================================
-   PRODUCT QUICK VIEW AND IMAGE ZOOM
+   PRODUCT RENDERING, FILTER & SORT
 ===================================== */
+function getFilteredProducts() {
+  const q = byId("searchInput").value.trim().toLowerCase();
+  let list = PRODUCTS.filter(p =>
+    (activeFilter === "all" || p.type === activeFilter) &&
+    (p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.type.toLowerCase().includes(q))
+  );
 
-const quickViewStyle = document.createElement("style");
+  if (activeSort === "price-asc") {
+    list = [...list].sort((a, b) => a.price - b.price);
+  } else if (activeSort === "price-desc") {
+    list = [...list].sort((a, b) => b.price - a.price);
+  } else if (activeSort === "name-asc") {
+    list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+  }
+  return list;
+}
 
-quickViewStyle.textContent = `
-  #productQuickView {
-    position: fixed;
-    width: min(92%, 520px);
-    max-width: 520px;
-    max-height: 90vh;
-    padding: 0;
-    border: none;
-    border-radius: 22px;
-    overflow: auto;
-    background: #fff;
-    color: #29202a;
-    box-shadow: 0 20px 70px rgba(0,0,0,.3);
+function renderProducts() {
+  const list = getFilteredProducts();
+  const meta = byId("resultsCount");
+  if (meta) {
+    meta.textContent = list.length === PRODUCTS.length
+      ? `Showing all ${PRODUCTS.length} products`
+      : `Showing ${list.length} of ${PRODUCTS.length} products`;
   }
 
-  #productQuickView::backdrop {
-    background: rgba(20, 10, 20, .72);
-    backdrop-filter: blur(5px);
+  byId("productGrid").innerHTML = list.length
+    ? list.map(p => {
+        const final = discounted(p.price);
+        const isSaved = wishlist.includes(p.id);
+        const typeLabel =
+          p.type === "gloss" ? "Lip Gloss" :
+          p.type === "care" ? "Lip Care" :
+          p.type === "liner" ? "Lip Liner" : "Beauty Tool";
+
+        return `
+          <article class="product-card">
+            <div class="product-visual" data-view="${p.id}">
+              <div class="card-badges">
+                <span class="discount-tag">10% OFF</span>
+                ${p.badge ? `<span class="bestseller-tag">${p.badge}</span>` : ""}
+              </div>
+
+              <button
+                class="wishlist-btn ${isSaved ? "saved" : ""}"
+                type="button"
+                data-wish="${p.id}"
+                aria-label="${isSaved ? "Remove from favourites" : "Save to favourites"}"
+                title="${isSaved ? "Saved" : "Save to favourites"}"
+              >${isSaved ? "♥" : "♡"}</button>
+
+              <img
+                class="product-photo"
+                src="${p.image || ""}"
+                alt="${p.name}"
+                loading="lazy"
+                style="display:${p.image ? "block" : "none"}"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+              >
+
+              <div class="product-art ${p.kind}" style="display:${p.image ? "none" : "flex"}">
+                ${p.kind === "gloss" ? "GLOSSY<br>POUT" : p.kind === "scrub" ? "LIP<br>SCRUB" : "GP"}
+              </div>
+
+              <span class="quick-view-pill">Quick View & Zoom</span>
+            </div>
+
+            <div class="product-body">
+              <div class="product-meta-top">
+                <span class="product-category">${typeLabel}</span>
+                <span class="shade-swatch" style="background:${p.swatch}" title="Shade tone"></span>
+              </div>
+
+              <h3 class="product-name" data-view="${p.id}">${p.name}</h3>
+              <p class="product-desc">${p.desc}</p>
+
+              <div class="product-footer">
+                <div class="price-row">
+                  <span class="price-now">${money(final)}</span>
+                  <span class="price-old">${money(p.price)}</span>
+                </div>
+                <button class="add-button" type="button" data-add="${p.id}">
+                  Add to bag
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("")
+    : `<div class="no-results">
+         <p>No products match your search or filter.</p>
+         <button class="button button-dark" type="button" id="resetFiltersBtn">Reset filters</button>
+       </div>`;
+
+  const resetBtn = byId("resetFiltersBtn");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      byId("searchInput").value = "";
+      activeFilter = "all";
+      activeSort = "featured";
+      byId("sortSelect").value = "featured";
+      document.querySelectorAll(".filter").forEach(x => x.classList.toggle("active", x.dataset.filter === "all"));
+      renderProducts();
+    });
   }
+}
 
-  .quick-view-image {
-    width: 100%;
-    height: 360px;
-    object-fit: contain;
-    background: #fff5f8;
-    display: block;
-    cursor: zoom-in;
-    transition: transform .3s ease;
-    transform-origin: center center;
-  }
-
-  .quick-view-image.zoomed {
-    transform: scale(1.8);
-    cursor: zoom-out;
-  }
-
-  #quickViewDetails {
-    overflow: hidden;
-  }
-
-  .quick-view-content {
-    padding: 22px;
-  }
-
-  .quick-view-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    z-index: 2;
-    width: 40px;
-    height: 40px;
-    border: 0;
-    border-radius: 50%;
-    background: white;
-    color: #333;
-    font-size: 25px;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,.12);
-  }
-
-  .quick-view-content h2 {
-    margin: 0 0 8px;
-    font-size: 25px;
-  }
-
-  .quick-view-content p {
-    color: #777;
-    margin: 8px 0;
-  }
-
-  .quick-view-price {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 16px 0;
-    font-size: 22px;
-    font-weight: 700;
-    color: #d94f83;
-  }
-
-  .quick-view-old {
-    color: #999;
-    text-decoration: line-through;
-    font-size: 15px;
-    font-weight: 400;
-  }
-
-  .quick-view-discount {
-    display: inline-block;
-    padding: 6px 10px;
-    border-radius: 20px;
-    background: #ffe6ef;
-    color: #c13b70;
-    font-size: 12px;
-    font-weight: 700;
-  }
-
-  .quick-view-add {
-    width: 100%;
-    padding: 15px;
-    border: 0;
-    border-radius: 12px;
-    background: #d94f83;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background .2s ease;
-  }
-
-  .quick-view-add:hover {
-    background: #bd356b;
-  }
-
-  .product-visual,
-  .product-name {
-    cursor: pointer;
-  }
-
-  .product-visual img {
-    cursor: zoom-in;
-  }
-
-  @media (max-width: 480px) {
-    #productQuickView {
-      width: 94%;
-      border-radius: 18px;
-    }
-
-    .quick-view-image {
-      height: 290px;
-    }
-
-    .quick-view-content {
-      padding: 18px;
-    }
-  }
-`;
-
-document.head.appendChild(quickViewStyle);
-
-const quickView = document.createElement("dialog");
-quickView.id = "productQuickView";
-
-quickView.innerHTML = `
-  <button
-    class="quick-view-close"
-    type="button"
-    aria-label="Close product details"
-  >×</button>
-
-  <div id="quickViewDetails"></div>
-`;
-
-document.body.appendChild(quickView);
+/* =====================================
+   QUICK VIEW MODAL
+===================================== */
+const quickView = byId("productQuickView");
 
 function openProductView(id) {
   const p = PRODUCTS.find(x => x.id === id);
-
   if (!p) return;
 
   const finalPrice = discounted(p.price);
+  const isSaved = wishlist.includes(p.id);
 
   byId("quickViewDetails").innerHTML = `
-    <img
-      class="quick-view-image"
-      src="${p.image}"
-      alt="${p.name}"
-    >
-
+    <div class="quick-view-image-wrap">
+      <img class="quick-view-image" src="${p.image}" alt="${p.name}" title="Click to zoom">
+    </div>
     <div class="quick-view-content">
-      <span class="quick-view-discount">10% OFF</span>
-
+      <div class="quick-view-tags">
+        <span class="quick-view-discount">10% OFF AUTOMATIC</span>
+        ${p.badge ? `<span class="bestseller-tag">${p.badge}</span>` : ""}
+      </div>
       <h2>${p.name}</h2>
-
       <p>${p.desc}</p>
-
+      <p style="font-size:12px">Tip: Tap the product image above to zoom in on details.</p>
       <div class="quick-view-price">
         ${money(finalPrice)}
         <span class="quick-view-old">${money(p.price)}</span>
       </div>
-
-      <button
-        class="quick-view-add"
-        type="button"
-        data-quick-add="${p.id}"
-      >
-        Add to cart
-      </button>
+      <div class="quick-view-actions">
+        <button class="quick-view-add" type="button" data-quick-add="${p.id}">Add to bag</button>
+        <button class="quick-view-wish ${isSaved ? "saved" : ""}" type="button" data-quick-wish="${p.id}" aria-label="Toggle favourite">
+          ${isSaved ? "♥" : "♡"}
+        </button>
+      </div>
     </div>
   `;
 
-  const productImage = byId("quickViewDetails")
-    .querySelector(".quick-view-image");
-
-  productImage.addEventListener("click", () => {
-    productImage.classList.toggle("zoomed");
-  });
-
+  const img = byId("quickViewDetails").querySelector(".quick-view-image");
+  img.addEventListener("click", () => img.classList.toggle("zoomed"));
   quickView.showModal();
 }
 
-quickView.querySelector(".quick-view-close").addEventListener("click", () => {
-  quickView.close();
-});
-
+quickView.querySelector(".quick-view-close").addEventListener("click", () => quickView.close());
+quickView.addEventListener("click", e => { if (e.target === quickView) quickView.close(); });
 quickView.addEventListener("click", e => {
-  if (e.target === quickView) {
-    quickView.close();
+  const addBtn = e.target.closest("[data-quick-add]");
+  if (addBtn) {
+    addToCart(addBtn.dataset.quickAdd);
+    addBtn.textContent = "Added to bag ✓";
+    setTimeout(() => { addBtn.textContent = "Add to bag"; }, 1100);
+    return;
+  }
+  const wishBtn = e.target.closest("[data-quick-wish]");
+  if (wishBtn) {
+    const id = wishBtn.dataset.quickWish;
+    toggleWishlist(id);
+    const saved = wishlist.includes(id);
+    wishBtn.classList.toggle("saved", saved);
+    wishBtn.textContent = saved ? "♥" : "♡";
   }
 });
 
 /* =====================================
-   RENDER PRODUCTS
+   CART & WISHLIST STATE
 ===================================== */
-
-function renderProducts() {
-  const q = byId("searchInput").value.trim().toLowerCase();
-
-  const list = PRODUCTS.filter(p =>
-    (activeFilter === "all" || p.type === activeFilter) &&
-    (p.name.toLowerCase().includes(q) ||
-     p.desc.toLowerCase().includes(q))
-  );
-
-  byId("productGrid").innerHTML = list.length
-    ? list.map(p => {
-        const available = p.price !== null;
-        const final = available ? discounted(p.price) : null;
-
-        return `
-          <article class="product-card">
-
-            <div class="product-visual" data-view="${p.id}">
-              ${available ? '<span class="discount-tag">10% OFF</span>' : ''}
-
-              <img
-                class="product-photo"
-                src="${p.image || ''}"
-                alt="${p.name}"
-                loading="lazy"
-                style="width:100%;height:220px;object-fit:contain;display:${p.image ? 'block' : 'none'}"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-              >
-
-              <div
-                class="product-art ${p.kind}"
-                style="display:${p.image ? 'none' : 'flex'}"
-              >
-                ${
-                  p.kind === "gloss" ? "GLOSSY<br>POUT" :
-                  p.kind === "liner" ? "GP" :
-                  p.kind === "tool" ? "GP" :
-                  p.kind === "scrub" ? "LIP<br>SCRUB" :
-                  "LIP<br>CARE"
-                }
-              </div>
-            </div>
-
-            <h3 class="product-name" data-view="${p.id}">
-              ${p.name}
-            </h3>
-
-            <p class="product-type">
-              ${
-                p.type === "gloss" ? "Lip gloss" :
-                p.type === "care" ? "Lip care" :
-                p.type === "liner" ? "Lip liner" :
-                "Beauty tool"
-              }
-            </p>
-
-            <p class="product-type">${p.desc}</p>
-
-            <div class="price-row">
-              ${
-                available
-                  ? `<span class="price-now">${money(final)}</span>
-                     <span class="price-old">${money(p.price)}</span>`
-                  : '<span class="price-soon">Price coming soon</span>'
-              }
-            </div>
-
-            <div class="product-actions">
-              <button
-                class="add-button"
-                data-add="${p.id}"
-                ${available ? "" : "disabled"}
-              >
-                ${available ? "Add to cart" : "Coming soon"}
-              </button>
-            </div>
-
-          </article>
-        `;
-      }).join("")
-    : '<p class="no-results">No products match your search. Try another name.</p>';
+function persistCart() {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  renderCart();
 }
 
-/* =====================================
-   CART FUNCTIONS
-===================================== */
+function persistWishlist() {
+  localStorage.setItem(WISH_KEY, JSON.stringify(wishlist));
+  renderWishlist();
+  renderProducts();
+}
 
-function persist() {
-  localStorage.setItem("glossyPoutCart", JSON.stringify(cart));
-  renderCart();
+function toggleWishlist(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  if (wishlist.includes(id)) {
+    wishlist = wishlist.filter(x => x !== id);
+    showToast(`Removed ${p.name} from favourites`);
+  } else {
+    wishlist.push(id);
+    showToast(`Saved ${p.name} to favourites ♡`);
+  }
+  persistWishlist();
+}
+
+function addToCart(id, silent = false) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  const existing = cart.find(x => x.id === id);
+  if (existing) {
+    existing.qty = Math.min(20, existing.qty + 1);
+  } else {
+    cart.push({ id, qty: 1 });
+  }
+  persistCart();
+  if (!silent) showToast(`${p.name} added to your bag`);
 }
 
 function totals() {
   let subtotal = 0;
   let discount = 0;
-
   for (const item of cart) {
     const p = PRODUCTS.find(x => x.id === item.id);
-
-    if (p && p.price !== null) {
+    if (p) {
       subtotal += p.price * item.qty;
       discount += (p.price - discounted(p.price)) * item.qty;
     }
   }
-
-  return {
-    subtotal,
-    discount,
-    total: subtotal - discount
-  };
+  return { subtotal, discount, total: subtotal - discount };
 }
 
 function renderCart() {
   const count = cart.reduce((s, x) => s + x.qty, 0);
-
   byId("cartCount").textContent = count;
 
   byId("cartLines").innerHTML = cart.length
     ? cart.map(x => {
         const p = PRODUCTS.find(y => y.id === x.id);
-
         return `
           <div class="cart-line">
-            <div>
+            <img class="cart-thumb" src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">
+            <div class="cart-line-info">
               <b>${p.name}</b>
               <small>${money(discounted(p.price))} each</small>
-
-              <button class="remove-line" data-remove="${p.id}">
-                Remove
-              </button>
+              <button class="remove-line" type="button" data-remove="${p.id}">Remove</button>
             </div>
-
             <div class="qty-controls">
-              <button data-qty="${p.id}" data-delta="-1" aria-label="Decrease">−</button>
+              <button type="button" data-qty="${p.id}" data-delta="-1" aria-label="Decrease">−</button>
               <span>${x.qty}</span>
-              <button data-qty="${p.id}" data-delta="1" aria-label="Increase">+</button>
+              <button type="button" data-qty="${p.id}" data-delta="1" aria-label="Increase">+</button>
             </div>
           </div>
         `;
       }).join("")
-    : '<p class="empty-cart">Your cart is waiting for a little shine.</p>';
+    : '<p class="empty-cart">Your bag is empty — explore our glosses & lip care to get glowing.</p>';
 
   const t = totals();
-
   byId("cartSubtotal").textContent = money(t.subtotal);
   byId("cartDiscount").textContent = "−" + money(t.discount);
   byId("cartTotal").textContent = money(t.total);
-
   byId("checkoutButton").disabled = !cart.length;
+
+  const itemPreview = byId("checkoutItemCount");
+  const totalPreview = byId("checkoutTotalPreview");
+  if (itemPreview) itemPreview.textContent = `${count} ${count === 1 ? "item" : "items"}`;
+  if (totalPreview) totalPreview.textContent = `Total: ${money(t.total)}`;
 }
 
-function addToCart(id) {
-  const p = PRODUCTS.find(x => x.id === id);
-
-  if (!p || p.price === null) return;
-
-  const item = cart.find(x => x.id === id);
-
-  if (item) {
-    item.qty++;
-  } else {
-    cart.push({ id, qty: 1 });
+function renderWishlist() {
+  const badge = byId("wishlistCount");
+  if (badge) {
+    badge.textContent = wishlist.length;
+    badge.hidden = wishlist.length === 0;
   }
 
-  persist();
+  byId("wishlistLines").innerHTML = wishlist.length
+    ? wishlist.map(id => {
+        const p = PRODUCTS.find(y => y.id === id);
+        if (!p) return "";
+        return `
+          <div class="cart-line">
+            <img class="cart-thumb" src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">
+            <div class="cart-line-info">
+              <b>${p.name}</b>
+              <small>${money(discounted(p.price))}</small>
+              <button class="remove-line" type="button" data-wish-remove="${p.id}">Remove</button>
+            </div>
+            <button class="combo-add-btn" type="button" data-wish-to-bag="${p.id}">Move to bag</button>
+          </div>
+        `;
+      }).join("")
+    : '<p class="empty-cart">No saved favourites yet. Tap ♡ on any product card to save it here.</p>';
 }
 
 /* =====================================
-   CART DRAWER
+   DRAWERS
 ===================================== */
+function closeAllDrawers() {
+  document.body.classList.remove("cart-open", "wishlist-open");
+  byId("cartDrawer").setAttribute("aria-hidden", "true");
+  byId("wishlistDrawer").setAttribute("aria-hidden", "true");
+}
 
 function openCart() {
+  closeAllDrawers();
   document.body.classList.add("cart-open");
   byId("cartDrawer").setAttribute("aria-hidden", "false");
 }
 
-function closeCart() {
-  document.body.classList.remove("cart-open");
-  byId("cartDrawer").setAttribute("aria-hidden", "true");
+function openWishlist() {
+  closeAllDrawers();
+  document.body.classList.add("wishlist-open");
+  byId("wishlistDrawer").setAttribute("aria-hidden", "false");
 }
 
 /* =====================================
-   PRODUCT GRID EVENTS
+   EVENT LISTENERS
 ===================================== */
-
 byId("productGrid").addEventListener("click", e => {
-
+  const wish = e.target.closest("[data-wish]");
+  if (wish) {
+    e.stopPropagation();
+    toggleWishlist(wish.dataset.wish);
+    return;
+  }
   const view = e.target.closest("[data-view]");
-
   if (view) {
     openProductView(view.dataset.view);
     return;
   }
-
-  const b = e.target.closest("[data-add]");
-
-  if (!b) return;
-
-  const id = b.dataset.add;
-
-  addToCart(id);
-
-  b.textContent = "Added ✓";
-
-  setTimeout(() => {
-    b.textContent = "Add to cart";
-  }, 900);
+  const add = e.target.closest("[data-add]");
+  if (add) {
+    addToCart(add.dataset.add);
+    add.textContent = "Added ✓";
+    add.classList.add("added");
+    setTimeout(() => {
+      add.textContent = "Add to bag";
+      add.classList.remove("added");
+    }, 950);
+  }
 });
 
-/* =====================================
-   ADD TO CART FROM QUICK VIEW
-===================================== */
-
-quickView.addEventListener("click", e => {
-  const b = e.target.closest("[data-quick-add]");
-
-  if (!b) return;
-
-  const id = b.dataset.quickAdd;
-
-  addToCart(id);
-
-  b.textContent = "Added to cart ✓";
+document.querySelectorAll("[data-combo]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const ids = btn.dataset.combo.split(",");
+    ids.forEach(id => addToCart(id.trim(), true));
+    showToast("Signature Lip Combo added to your bag ✨");
+    openCart();
+  });
 });
-
-/* =====================================
-   CART LINE EVENTS
-===================================== */
 
 byId("cartLines").addEventListener("click", e => {
-
   const rm = e.target.closest("[data-remove]");
-
   if (rm) {
     cart = cart.filter(x => x.id !== rm.dataset.remove);
-    persist();
+    persistCart();
     return;
   }
-
   const q = e.target.closest("[data-qty]");
-
   if (q) {
     const item = cart.find(x => x.id === q.dataset.qty);
-
     if (item) {
       item.qty += Number(q.dataset.delta);
-
-      if (item.qty < 1) {
-        cart = cart.filter(x => x.id !== item.id);
-      }
-
-      persist();
+      if (item.qty < 1) cart = cart.filter(x => x.id !== item.id);
+      persistCart();
     }
   }
 });
 
-/* =====================================
-   FILTERS
-===================================== */
+byId("wishlistLines").addEventListener("click", e => {
+  const rm = e.target.closest("[data-wish-remove]");
+  if (rm) {
+    toggleWishlist(rm.dataset.wishRemove);
+    return;
+  }
+  const move = e.target.closest("[data-wish-to-bag]");
+  if (move) {
+    addToCart(move.dataset.wishToBag);
+    openCart();
+  }
+});
 
 byId("filters").addEventListener("click", e => {
   const b = e.target.closest("[data-filter]");
-
   if (!b) return;
-
   activeFilter = b.dataset.filter;
-
-  document.querySelectorAll(".filter").forEach(x =>
-    x.classList.toggle("active", x === b)
-  );
-
+  document.querySelectorAll(".filter").forEach(x => x.classList.toggle("active", x === b));
   renderProducts();
 });
 
-/* =====================================
-   SEARCH
-===================================== */
+byId("sortSelect").addEventListener("change", e => {
+  activeSort = e.target.value;
+  renderProducts();
+});
 
 byId("searchInput").addEventListener("input", renderProducts);
-
-/* =====================================
-   CART BUTTONS
-===================================== */
-
 byId("cartTrigger").addEventListener("click", openCart);
+byId("wishlistTrigger").addEventListener("click", openWishlist);
+byId("closeCart").addEventListener("click", closeAllDrawers);
+byId("closeWishlist").addEventListener("click", closeAllDrawers);
+byId("drawerBackdrop").addEventListener("click", closeAllDrawers);
 
-byId("closeCart").addEventListener("click", closeCart);
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeAllDrawers();
+});
 
-byId("drawerBackdrop").addEventListener("click", closeCart);
-
-/* =====================================
-   CHECKOUT
-===================================== */
-
+/* CHECKOUT */
 byId("checkoutButton").addEventListener("click", () => {
-  closeCart();
+  closeAllDrawers();
   byId("checkoutDialog").showModal();
 });
 
-byId("closeCheckout").addEventListener("click", () =>
-  byId("checkoutDialog").close()
-);
+byId("closeCheckout").addEventListener("click", () => byId("checkoutDialog").close());
 
 byId("checkoutForm").addEventListener("submit", async e => {
   e.preventDefault();
-
   const button = byId("payButton");
   const msg = byId("checkoutMessage");
 
@@ -717,54 +641,217 @@ byId("checkoutForm").addEventListener("submit", async e => {
     });
 
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || "Could not start payment.");
-    }
+    if (!response.ok) throw new Error(data.error || "Could not start payment.");
 
     window.location.href = data.authorization_url;
-
   } catch (err) {
     msg.textContent = err.message || "Something went wrong. Please try again.";
-
     button.disabled = false;
     button.textContent = "Pay securely with Paystack ↗";
   }
 });
 
-/* =====================================
-   NEWSLETTER
-===================================== */
-
+/* NEWSLETTER */
 byId("newsletterForm").addEventListener("submit", e => {
   e.preventDefault();
-
-  byId("newsletterMessage").textContent =
-    "Thanks for your interest! Newsletter sign-up will be available soon.";
-
+  byId("newsletterMessage").textContent = "You're on the list! Stay tuned for new shade drops ♡";
+  showToast("Welcome to the Gloss Bar list ♡");
   e.currentTarget.reset();
 });
 
-/* =====================================
-   MOBILE MENU
-===================================== */
-
+/* MOBILE MENU & SCROLL EFFECTS */
 byId("menuToggle").addEventListener("click", () => {
   const nav = byId("mainNav");
   const open = nav.classList.toggle("open");
-
   byId("menuToggle").setAttribute("aria-expanded", String(open));
 });
 
-/* =====================================
-   CURRENT YEAR
-===================================== */
+byId("mainNav").addEventListener("click", e => {
+  if (e.target.tagName === "A") {
+    byId("mainNav").classList.remove("open");
+    byId("menuToggle").setAttribute("aria-expanded", "false");
+  }
+});
 
+window.addEventListener("scroll", () => {
+  const y = window.scrollY;
+  byId("siteHeader").classList.toggle("scrolled", y > 12);
+  byId("backToTop").classList.toggle("visible", y > 450);
+}, { passive: true });
+
+byId("backToTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 byId("year").textContent = new Date().getFullYear();
 
 /* =====================================
-   INITIAL RENDER
+   NOTIFICATIONS & OWNER PANEL
 ===================================== */
+(() => {
+  const bell = byId("notificationTrigger");
+  const dialog = byId("notificationDialog");
+  const closeButton = byId("closeNotifications");
+  const list = byId("notificationList");
+  const count = byId("notificationCount");
 
+  const ownerLogin = byId("showOwnerLogin");
+  const ownerPanel = byId("ownerPanel");
+  const ownerToken = byId("ownerToken");
+  const ownerTitle = byId("notificationTitle");
+  const ownerMessage = byId("notificationMessageInput");
+  const publishButton = byId("publishNotification");
+  const ownerStatus = byId("ownerStatus");
+  const ownerList = byId("ownerNotificationList");
+  const logoutButton = byId("ownerLogout");
+
+  let notifications = [];
+  let seenIds = new Set();
+  let firstLoad = true;
+
+  try {
+    const saved = localStorage.getItem(NOTIF_SEEN_KEY);
+    if (saved !== null) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed)) seenIds = new Set(parsed.map(String));
+    }
+  } catch (_) {}
+
+  function saveSeenNotifications() {
+    try {
+      localStorage.setItem(NOTIF_SEEN_KEY, JSON.stringify([...seenIds]));
+    } catch (_) {}
+  }
+
+  function updateBadge() {
+    const unread = notifications.filter(item => !seenIds.has(String(item.id))).length;
+    count.textContent = unread > 99 ? "99+" : String(unread);
+    count.hidden = unread === 0;
+  }
+
+  function markNotificationsAsRead() {
+    notifications.forEach(item => seenIds.add(String(item.id)));
+    saveSeenNotifications();
+    updateBadge();
+  }
+
+  async function loadNotifications() {
+    try {
+      const response = await fetch("/api/notifications", { method: "GET", cache: "no-store" });
+      if (!response.ok) throw new Error("Unable to load notifications.");
+      const data = await response.json();
+      notifications = Array.isArray(data.notifications) ? data.notifications : [];
+
+      if (firstLoad) {
+        if (localStorage.getItem(NOTIF_SEEN_KEY) === null) markNotificationsAsRead();
+        firstLoad = false;
+      }
+      if (dialog.open) markNotificationsAsRead();
+      else updateBadge();
+
+      renderNotifications();
+    } catch (_) {
+      if (firstLoad) {
+        list.innerHTML = '<p class="notification-empty">Announcements are temporarily unavailable.</p>';
+      }
+    }
+  }
+
+  function renderNotifications() {
+    if (!notifications.length) {
+      list.innerHTML = '<p class="notification-empty">No announcements yet. Check back soon! ♡</p>';
+      renderOwnerList();
+      return;
+    }
+    list.innerHTML = "";
+    notifications.forEach(n => {
+      const card = document.createElement("article");
+      card.className = "notification-card";
+      const h = document.createElement("h3");
+      h.textContent = n.title || "Announcement";
+      const p = document.createElement("p");
+      p.textContent = n.message || "";
+      const d = document.createElement("span");
+      d.className = "notification-date";
+      const created = new Date(n.created_at);
+      d.textContent = Number.isNaN(created.getTime()) ? "" : created.toLocaleString();
+      card.append(h, p, d);
+      list.appendChild(card);
+    });
+    renderOwnerList();
+  }
+
+  function renderOwnerList() {
+    ownerList.innerHTML = "";
+    notifications.forEach(n => {
+      const card = document.createElement("div");
+      card.className = "notification-card";
+      const h = document.createElement("h3");
+      h.textContent = n.title || "Announcement";
+      const rm = document.createElement("button");
+      rm.className = "owner-delete";
+      rm.type = "button";
+      rm.textContent = "Delete notification";
+      rm.addEventListener("click", async () => {
+        if (!confirm("Delete this notification?")) return;
+        await ownerRequest("DELETE", { id: n.id });
+      });
+      card.append(h, rm);
+      ownerList.appendChild(card);
+    });
+  }
+
+  async function ownerRequest(method, body) {
+    const token = ownerToken.value.trim();
+    if (!token) {
+      ownerStatus.textContent = "Enter your private owner token first.";
+      return;
+    }
+    ownerStatus.textContent = "Please wait...";
+    try {
+      const response = await fetch("/api/notifications", {
+        method,
+        headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+        body: JSON.stringify(body)
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Request failed.");
+      ownerStatus.textContent = method === "POST" ? "Announcement published!" : "Notification deleted.";
+      if (method === "POST") {
+        ownerTitle.value = "";
+        ownerMessage.value = "";
+      }
+      await loadNotifications();
+    } catch (err) {
+      ownerStatus.textContent = err.message;
+    }
+  }
+
+  bell.addEventListener("click", async () => {
+    dialog.showModal();
+    markNotificationsAsRead();
+    await loadNotifications();
+  });
+  closeButton.addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", e => { if (e.target === dialog) dialog.close(); });
+  ownerLogin.addEventListener("click", () => {
+    ownerPanel.classList.remove("owner-hidden");
+    ownerLogin.classList.add("owner-hidden");
+  });
+  publishButton.addEventListener("click", () => {
+    ownerRequest("POST", { title: ownerTitle.value, message: ownerMessage.value });
+  });
+  logoutButton.addEventListener("click", () => {
+    ownerToken.value = "";
+    ownerTitle.value = "";
+    ownerMessage.value = "";
+    ownerStatus.textContent = "";
+    ownerPanel.classList.add("owner-hidden");
+    ownerLogin.classList.remove("owner-hidden");
+  });
+
+  loadNotifications();
+  setInterval(loadNotifications, 15000);
+})();
+
+/* INITIALIZE */
 renderProducts();
 renderCart();
+renderWishlist();
