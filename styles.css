@@ -41,3 +41,67 @@ footer{background:#171114;color:#f5e9de;padding:55px 7% 22px}.footer-top{display
 .about-cta .button{margin-top:20px}
 .quick-view-discount{display:inline-block;background:#e8d4b0;color:#4a3825;padding:6px 10px;font:700 8px var(--display);letter-spacing:.12em}
 @media(max-width:700px){.about-hero{padding:75px 6%}.about-content{padding-top:60px;padding-bottom:65px}.about-values{grid-template-columns:1fr;margin-bottom:65px}.about-values>div{padding:28px;min-height:0}.about-timeline{margin-bottom:65px}}
+
+/* GLOSSY POUT — ADD TO CART BUTTONS */
+
+.product-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.product-actions .product-open {
+  width: fit-content;
+  margin-top: 0;
+  padding: 5px 0;
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 15px;
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+  background: var(--teal);
+  color: #f8f0e5;
+  font-family: var(--display);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .15em;
+  cursor: pointer;
+  transition:
+    background .3s ease,
+    color .3s ease,
+    border-color .3s ease,
+    transform .3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.add-to-cart-btn.added {
+  background: var(--teal2);
+  border-color: var(--teal2);
+  color: #fff;
+}
+
+.add-to-cart-btn:disabled {
+  cursor: default;
+  opacity: .85;
+}
+
+@media(max-width:700px) {
+  .product-actions {
+    gap: 7px;
+  }
+
+  .add-to-cart-btn {
+    min-height: 42px;
+    font-size: 8px;
+  }
+}
