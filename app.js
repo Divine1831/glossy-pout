@@ -1,3 +1,4 @@
+
 const PRODUCTS = [
  {id:"cherry-pop",name:"Cherry Pop",type:"gloss",price:3000,desc:"A bold red lip gloss",image:"https://drive.google.com/thumbnail?id=1ErqSBrclazr4dqiYbOJKEtTspC2A7lt7&sz=w1000"},
  {id:"candy-cloud",name:"Candy Cloud",type:"gloss",price:3000,desc:"A soft pink lip gloss",image:"https://drive.google.com/thumbnail?id=1UXIzZa5Y6hMhDGvf09AMS7e02sk5HCCE&sz=w1000"},
@@ -193,7 +194,7 @@ $('checkoutForm').addEventListener('submit', async e => {
   }
 });
 
-/* Notifications: existing /api/notifications endpoint and owner token contract */
+/* Notifications */
 let notifications = [], seen = new Set();
 try { seen = new Set(JSON.parse(localStorage.getItem('glossyPoutSeenNotifications') || '[]').map(String)); } catch {}
 
@@ -280,7 +281,7 @@ renderCart();
 loadNotifications();
 setInterval(loadNotifications, 90000);
 
-/* Intro animation once per tab visit */
+/* Intro animation */
 function startIntro() {
   const intro = $('intro'), skip = $('skipIntro'), progress = $('introProgress'), percent = $('introPercent');
   const done = () => {
@@ -387,11 +388,33 @@ function initCursor() {
   });
 }
 
-/* Three.js hero: glossy bottles, gold caps, shade switching, drag and safe fallback */
+/* ==========================================================
+   REAL PRODUCT 3D HERO
+   Uses the actual product photos from the catalogue.
+   No artificial bottle models are created.
+========================================================== */
+
 function initThreeHero() {
   const host = $('heroCanvas');
   if (!host || host.dataset.heroInitialized === 'true') return;
   host.dataset.heroInitialized = 'true';
+
+  const heroProducts = PRODUCTS.filter(p => p.type === 'gloss');
+  let selectedIndex = 4;
+  let renderer, scene, camera, carousel, animationFrame;
+  let resizeObserver;
+  let dragging = false;
+  let lastX = 0;
+  let rotation = 0;
+  let cards = [];
+  let fallbackMode = false;
+
+  const shadeProducts = {
+    bare: 'bare-essence',
+    cherry: 'cherry-pop',
+    peach: 'peach-perfect',
+    cocoa: 'choco-royale'
+  };
 
   const shadeNames = {
     bare: 'BARE ESSENCE',
@@ -399,319 +422,427 @@ function initThreeHero() {
     peach: 'PEACH PERFECT',
     cocoa: 'CHOCO ROYALE'
   };
-  const shadeColors = {
-    bare: 0xc88f88,
-    cherry: 0x8b263d,
-    peach: 0xd89c75,
-    cocoa: 0x684033
-  };
-
-  let selectedShade = 'bare';
-  let fallbackCanvas = null;
-  let fallbackObserver = null;
-  let activeGlass = null;
-  let activeBottle = null;
 
   function updateShadeButtons(btn) {
-    document.querySelectorAll('[data-shade]').forEach(x => x.classList.toggle('active', x === btn));
-    if ($('shadeName')) $('shadeName').textContent = shadeNames[btn.dataset.shade];
-  }
-
-  function drawFallback() {
-    host.replaceChildren();
-    fallbackCanvas = document.createElement('canvas');
-    fallbackCanvas.setAttribute('aria-label', 'Illustration of three glossy lip gloss bottles with gold caps');
-    fallbackCanvas.style.cssText = 'display:block;width:100%;height:100%;touch-action:pan-y';
-    host.appendChild(fallbackCanvas);
-    const ctx = fallbackCanvas.getContext('2d');
-    if (!ctx) return;
-
-    function paint() {
-      const rect = host.getBoundingClientRect();
-      const w = Math.max(1, rect.width), h = Math.max(1, rect.height);
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      fallbackCanvas.width = Math.round(w * dpr);
-      fallbackCanvas.height = Math.round(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, w, h);
-
-      const shades = [
-        { color:'#8b263d', x:.25, scale:.82 },
-        { color:'#' + shadeColors[selectedShade].toString(16).padStart(6,'0'), x:.5, scale:1 },
-        { color:'#d89c75', x:.75, scale:.82 }
-      ];
-
-      shades.forEach(bottle => {
-        const bw = Math.min(w * .19, 112) * bottle.scale;
-        const bh = Math.min(h * .58, 270) * bottle.scale;
-        const x = w * bottle.x - bw / 2;
-        const y = h * .26 + (1 - bottle.scale) * 28;
-        const capH = bh * .27;
-        const bodyY = y + capH * .78;
-        const bodyH = bh - capH * .78;
-
-        const gold = ctx.createLinearGradient(x, 0, x + bw, 0);
-        gold.addColorStop(0, '#8c6938');
-        gold.addColorStop(.35, '#f2dca7');
-        gold.addColorStop(.65, '#b68b4d');
-        gold.addColorStop(1, '#f8e7bd');
-
-        const gloss = ctx.createLinearGradient(x, 0, x + bw, 0);
-        gloss.addColorStop(0, 'rgba(255,255,255,.35)');
-        gloss.addColorStop(.25, bottle.color);
-        gloss.addColorStop(.72, bottle.color);
-        gloss.addColorStop(1, 'rgba(255,255,255,.48)');
-
-        ctx.save();
-        ctx.shadowColor = 'rgba(0,0,0,.2)';
-        ctx.shadowBlur = 18;
-        ctx.fillStyle = gold;
-        ctx.fillRect(x + bw*.18, y, bw*.64, capH);
-        ctx.fillStyle = gloss;
-        ctx.beginPath();
-        ctx.roundRect(x, bodyY, bw, bodyH, [12,12,18,18]);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-        ctx.strokeStyle = 'rgba(255,255,255,.55)';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(x + bw*.2, bodyY + 12);
-        ctx.lineTo(x + bw*.2, bodyY + bodyH - 18);
-        ctx.stroke();
-        ctx.fillStyle = 'rgba(255,244,226,.85)';
-        ctx.font = `600 ${Math.max(8, bw*.105)}px Manrope, sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.fillText('GLOSSY', x + bw/2, bodyY + bodyH*.53);
-        ctx.fillText('POUT', x + bw/2, bodyY + bodyH*.63);
-        ctx.restore();
-      });
-    }
-
-    paint();
-    if ('ResizeObserver' in window) {
-      fallbackObserver = new ResizeObserver(paint);
-      fallbackObserver.observe(host);
-    } else {
-      window.addEventListener('resize', paint);
+    document.querySelectorAll('[data-shade]').forEach(x => {
+      x.classList.toggle('active', x === btn);
+    });
+    if ($('shadeName')) {
+      $('shadeName').textContent = shadeNames[btn.dataset.shade] || 'GLOSSY POUT';
     }
   }
 
-  if (!window.THREE) {
-    console.warn('Three.js did not load; showing the hero fallback.');
-    drawFallback();
-  } else {
-    try {
-      const THREE = window.THREE;
-      const width = Math.max(1, host.clientWidth);
-      const height = Math.max(1, host.clientHeight);
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(34, width / height, .1, 100);
-      camera.position.set(0, 1.1, 8.8);
+  function setSelectedProduct(id) {
+    const index = heroProducts.findIndex(p => p.id === id);
+    if (index < 0) return;
+    selectedIndex = index;
 
-      const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
-      renderer.setSize(width, height);
-      renderer.outputColorSpace = THREE.SRGBColorSpace;
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.15;
-      renderer.domElement.style.cssText = 'display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab';
-      host.replaceChildren(renderer.domElement);
+    if ($('shadeName')) {
+      $('shadeName').textContent = heroProducts[index].name.toUpperCase();
+    }
 
-      scene.add(new THREE.AmbientLight(0xffffff, 1.55));
-      const key = new THREE.DirectionalLight(0xffe7c1, 3.1);
-      key.position.set(4, 6, 7);
-      scene.add(key);
-      const fill = new THREE.PointLight(0xffd8c0, 24, 18);
-      fill.position.set(-4, 2, 3);
-      scene.add(fill);
-      const rim = new THREE.PointLight(0x5bb7a1, 28, 18);
-      rim.position.set(4, 1, -3);
-      scene.add(rim);
-
-      const gold = new THREE.MeshStandardMaterial({ color:0xc6a15e, metalness:.88, roughness:.2 });
-      const goldTop = new THREE.MeshStandardMaterial({ color:0xe8d2a2, metalness:.9, roughness:.16 });
-      const bandMaterial = new THREE.MeshStandardMaterial({ color:0x8e6a39, metalness:.9, roughness:.2 });
-      const labelMaterial = new THREE.MeshStandardMaterial({ color:0xf1dfc2, metalness:.08, roughness:.42 });
-      const carousel = new THREE.Group();
-      scene.add(carousel);
-      const bottles = [];
-
-      function makeBottle(color, index) {
-        const group = new THREE.Group();
-        const glass = new THREE.MeshPhysicalMaterial({
-          color,
-          metalness:.1,
-          roughness:.14,
-          transmission:.12,
-          thickness:.5,
-          clearcoat:1,
-          clearcoatRoughness:.06
+    cards.forEach((card, i) => {
+      if (!card) return;
+      const active = i === selectedIndex;
+      if (window.gsap) {
+        gsap.to(card.scale, {
+          x: active ? 1.18 : .88,
+          y: active ? 1.18 : .88,
+          z: active ? 1.18 : .88,
+          duration: .55,
+          ease: 'back.out(1.8)'
         });
-
-        const body = new THREE.Mesh(new THREE.CylinderGeometry(.48, .52, 2.55, 48), glass);
-        body.position.y = -.15;
-        group.add(body);
-
-        const base = new THREE.Mesh(
-          new THREE.CylinderGeometry(.49, .49, .12, 48),
-          new THREE.MeshStandardMaterial({ color:0x6c3848, metalness:.32, roughness:.26 })
-        );
-        base.position.y = -1.48;
-        group.add(base);
-
-        const neck = new THREE.Mesh(new THREE.CylinderGeometry(.25, .25, .28, 32), gold);
-        neck.position.y = 1.25;
-        group.add(neck);
-
-        const cap = new THREE.Mesh(new THREE.CylinderGeometry(.34, .35, .85, 40), gold);
-        cap.position.y = 1.78;
-        group.add(cap);
-
-        const capTop = new THREE.Mesh(new THREE.CylinderGeometry(.34, .34, .08, 40), goldTop);
-        capTop.position.y = 2.245;
-        group.add(capTop);
-
-        const band = new THREE.Mesh(new THREE.CylinderGeometry(.355, .355, .08, 40), bandMaterial);
-        band.position.y = 1.38;
-        group.add(band);
-
-        const label = new THREE.Mesh(new THREE.PlaneGeometry(.78, .58), labelMaterial);
-        label.position.set(0, -.18, .505);
-        group.add(label);
-
-        group.position.x = (index - 1) * 1.75;
-        group.position.y = index === 1 ? -.05 : -.3;
-        group.rotation.z = (index - 1) * -.08;
-        group.scale.setScalar(index === 1 ? 1.04 : .84);
-        carousel.add(group);
-        bottles.push({ group, glass, index });
-      }
-
-      makeBottle(shadeColors.cherry, 0);
-      makeBottle(shadeColors.bare, 1);
-      makeBottle(shadeColors.peach, 2);
-
-      const floor = new THREE.Mesh(
-        new THREE.CircleGeometry(2.3, 64),
-        new THREE.MeshBasicMaterial({ color:0x1b4942, transparent:true, opacity:.2 })
-      );
-      floor.rotation.x = -Math.PI / 2;
-      floor.position.y = -1.55;
-      scene.add(floor);
-
-      let dragging = false;
-      let lastX = 0;
-      let rotation = 0;
-      let frame = 0;
-      let resizeObserver;
-
-      renderer.domElement.addEventListener('pointerdown', e => {
-        dragging = true;
-        lastX = e.clientX;
-        renderer.domElement.style.cursor = 'grabbing';
-        try { renderer.domElement.setPointerCapture(e.pointerId); } catch {}
-      });
-      renderer.domElement.addEventListener('pointermove', e => {
-        if (!dragging) return;
-        rotation += (e.clientX - lastX) * .009;
-        lastX = e.clientX;
-      });
-
-      const stopDrag = () => {
-        dragging = false;
-        renderer.domElement.style.cursor = 'grab';
-      };
-      renderer.domElement.addEventListener('pointerup', stopDrag);
-      renderer.domElement.addEventListener('pointercancel', stopDrag);
-      renderer.domElement.addEventListener('lostpointercapture', stopDrag);
-
-      document.querySelectorAll('[data-shade]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const shade = btn.dataset.shade;
-          if (!shadeColors[shade]) return;
-          selectedShade = shade;
-          updateShadeButtons(btn);
-          bottles[1].glass.color.setHex(shadeColors[shade]);
-          bottles[1].glass.needsUpdate = true;
-          if (window.gsap) {
-            gsap.fromTo(bottles[1].group.scale,
-              { x:1.12, y:1.12, z:1.12 },
-              { x:1.04, y:1.04, z:1.04, duration:.45, ease:'back.out(2)' }
-            );
-          }
-        });
-      });
-
-      function resize() {
-        const w = Math.max(1, host.clientWidth);
-        const h = Math.max(1, host.clientHeight);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
-      }
-
-      if ('ResizeObserver' in window) {
-        resizeObserver = new ResizeObserver(resize);
-        resizeObserver.observe(host);
       } else {
-        window.addEventListener('resize', resize);
+        card.scale.setScalar(active ? 1.18 : .88);
       }
+    });
+  }
 
-      function render(time) {
-        frame = requestAnimationFrame(render);
-        if (!dragging) rotation += .0015;
-        carousel.rotation.y = rotation;
-        carousel.position.y = Math.sin(time * .0007) * .07;
-        bottles.forEach((b, i) => {
-          b.group.rotation.y = Math.sin(time * .00045 + i) * .08;
-        });
-        renderer.render(scene, camera);
+  function showImageFallback() {
+    if (fallbackMode) return;
+    fallbackMode = true;
+    if (animationFrame) cancelAnimationFrame(animationFrame);
+    if (resizeObserver) resizeObserver.disconnect();
+
+    host.replaceChildren();
+
+    const wrap = document.createElement('div');
+    wrap.className = 'gp-real-product-fallback';
+    wrap.style.cssText = `
+      position:absolute;inset:0;width:100%;height:100%;
+      display:flex;align-items:center;justify-content:center;
+      perspective:1000px;overflow:hidden;isolation:isolate;
+    `;
+
+    const stage = document.createElement('div');
+    stage.style.cssText = `
+      position:relative;width:100%;height:100%;
+      display:flex;align-items:center;justify-content:center;
+      transform-style:preserve-3d;
+    `;
+
+    const visible = [
+      heroProducts[0],
+      heroProducts[2],
+      heroProducts[4],
+      heroProducts[6],
+      heroProducts[7]
+    ].filter(Boolean);
+
+    visible.forEach((product, index) => {
+      const card = document.createElement('div');
+      card.style.cssText = `
+        position:absolute;width:clamp(95px,19%,155px);
+        height:clamp(155px,48%,285px);
+        display:flex;align-items:center;justify-content:center;
+        padding:9px;border-radius:18px;
+        background:rgba(255,255,255,.08);
+        border:1px solid rgba(226,190,128,.5);
+        box-shadow:0 18px 45px rgba(0,0,0,.22);
+        backdrop-filter:blur(8px);
+        transform-style:preserve-3d;
+        animation:gpProductFloat ${3.2 + index * .35}s ease-in-out ${index * -.4}s infinite alternate;
+        left:${index * 18 + 5}%;
+        z-index:${index === 2 ? 5 : 3};
+      `;
+
+      const img = document.createElement('img');
+      img.src = product.image;
+      img.alt = product.name;
+      img.loading = 'eager';
+      img.style.cssText = `
+        display:block;width:100%;height:100%;object-fit:contain;
+        filter:drop-shadow(0 12px 12px rgba(0,0,0,.18));
+        border-radius:12px;
+      `;
+
+      const label = document.createElement('span');
+      label.textContent = product.name.toUpperCase();
+      label.style.cssText = `
+        position:absolute;bottom:8px;left:0;right:0;
+        text-align:center;font-size:9px;letter-spacing:2px;
+        color:#fff;text-shadow:0 2px 5px rgba(0,0,0,.7);
+      `;
+
+      card.append(img, label);
+      stage.appendChild(card);
+    });
+
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes gpProductFloat {
+        from { transform:translateY(12px) rotateY(-9deg) rotateZ(-3deg); }
+        to { transform:translateY(-14px) rotateY(9deg) rotateZ(3deg); }
       }
-      render(0);
+    `;
 
-      window.addEventListener('pagehide', () => {
-        cancelAnimationFrame(frame);
-        if (resizeObserver) resizeObserver.disconnect();
-        else window.removeEventListener('resize', resize);
-        if (fallbackObserver) fallbackObserver.disconnect();
-        renderer.dispose();
-        scene.traverse(obj => {
-          if (obj.geometry) obj.geometry.dispose();
-          if (obj.material) {
-            if (Array.isArray(obj.material)) obj.material.forEach(m => m.dispose());
-            else obj.material.dispose();
-          }
-        });
-      }, { once:true });
+    wrap.append(stage);
+    host.append(style, wrap);
 
-    } catch (err) {
-      console.warn('3D hero could not start; showing the fallback.', err);
-      drawFallback();
-    }
+    document.querySelectorAll('[data-shade]').forEach(btn => {
+      btn.onclick = () => {
+        const id = shadeProducts[btn.dataset.shade];
+        if (!id) return;
+        updateShadeButtons(btn);
+        const product = PRODUCTS.find(p => p.id === id);
+        if ($('shadeName')) $('shadeName').textContent = product.name.toUpperCase();
+      };
+    });
   }
 
   if (!window.THREE) {
+    console.warn('Three.js did not load. Using real product image animation.');
+    showImageFallback();
+    return;
+  }
+
+  try {
+    const THREE = window.THREE;
+    const width = Math.max(1, host.clientWidth);
+    const height = Math.max(1, host.clientHeight);
+
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera(38, width / height, .1, 100);
+    camera.position.set(0, 0, 9.5);
+
+    renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true
+    });
+
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+    renderer.setSize(width, height);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
+    renderer.domElement.style.cssText = `
+      display:block;width:100%;height:100%;
+      touch-action:pan-y;cursor:grab;
+    `;
+
+    host.replaceChildren(renderer.domElement);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 2));
+
+    const keyLight = new THREE.DirectionalLight(0xffe5c0, 3.5);
+    keyLight.position.set(4, 5, 7);
+    scene.add(keyLight);
+
+    const fillLight = new THREE.PointLight(0xf5b8c8, 22, 20);
+    fillLight.position.set(-4, 1, 4);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.PointLight(0xd9b36b, 28, 20);
+    rimLight.position.set(3, 2, -4);
+    scene.add(rimLight);
+
+    carousel = new THREE.Group();
+    scene.add(carousel);
+
+    const loader = new THREE.TextureLoader();
+    loader.setCrossOrigin('anonymous');
+
+    const goldMaterial = new THREE.MeshStandardMaterial({
+      color: 0xd4b16f,
+      metalness: .88,
+      roughness: .2
+    });
+
+    const cardsData = heroProducts;
+    let loadedCount = 0;
+    let failedCount = 0;
+
+    function createProductCard(product, index, texture) {
+      const group = new THREE.Group();
+
+      const ratio = texture.image.width / texture.image.height || .7;
+      const cardHeight = 2.35;
+      const cardWidth = Math.min(1.75, cardHeight * ratio);
+
+      const frame = new THREE.Mesh(
+        new THREE.BoxGeometry(cardWidth + .12, cardHeight + .12, .09),
+        goldMaterial
+      );
+
+      group.add(frame);
+
+      const photoMaterial = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        side: THREE.DoubleSide,
+        toneMapped: false
+      });
+
+      const photo = new THREE.Mesh(
+        new THREE.PlaneGeometry(cardWidth, cardHeight),
+        photoMaterial
+      );
+
+      photo.position.z = .052;
+      group.add(photo);
+
+      const back = new THREE.Mesh(
+        new THREE.PlaneGeometry(cardWidth, cardHeight),
+        new THREE.MeshStandardMaterial({
+          color: 0x241b20,
+          roughness: .32,
+          metalness: .18,
+          side: THREE.DoubleSide
+        })
+      );
+
+      back.position.z = -.052;
+      group.add(back);
+
+      const angle = (index / cardsData.length) * Math.PI * 2;
+      const radius = 2.05;
+
+      group.position.set(
+        Math.sin(angle) * radius,
+        Math.cos(angle * 2) * .22,
+        Math.cos(angle) * .6
+      );
+
+      group.rotation.y = -angle * .25;
+      group.scale.setScalar(index === selectedIndex ? 1.18 : .88);
+
+      carousel.add(group);
+      cards[index] = group;
+
+      const labelCanvas = document.createElement('canvas');
+      labelCanvas.width = 512;
+      labelCanvas.height = 96;
+
+      const ctx = labelCanvas.getContext('2d');
+      if (ctx) {
+        ctx.fillStyle = '#f4dfba';
+        ctx.font = 'bold 34px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(product.name.toUpperCase(), 256, 57);
+      }
+
+      const labelTexture = new THREE.CanvasTexture(labelCanvas);
+      const label = new THREE.Mesh(
+        new THREE.PlaneGeometry(cardWidth, .24),
+        new THREE.MeshBasicMaterial({
+          map: labelTexture,
+          transparent: true,
+          side: THREE.DoubleSide
+        })
+      );
+
+      label.position.set(0, -cardHeight / 2 - .19, .06);
+      group.add(label);
+    }
+
+    cardsData.forEach((product, index) => {
+      loader.load(
+        product.image,
+        texture => {
+          texture.colorSpace = THREE.SRGBColorSpace;
+          texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+          createProductCard(product, index, texture);
+          loadedCount++;
+
+          if (loadedCount === cardsData.length) {
+            setSelectedProduct(heroProducts[selectedIndex].id);
+          }
+        },
+        undefined,
+        error => {
+          console.warn('Could not load 3D product image:', product.name, error);
+          failedCount++;
+
+          if (failedCount === cardsData.length) {
+            showImageFallback();
+          }
+        }
+      );
+    });
+
+    let startX = 0;
+
+    renderer.domElement.addEventListener('pointerdown', e => {
+      dragging = true;
+      lastX = e.clientX;
+      startX = e.clientX;
+      renderer.domElement.style.cursor = 'grabbing';
+      try {
+        renderer.domElement.setPointerCapture(e.pointerId);
+      } catch {}
+    });
+
+    renderer.domElement.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      rotation += (e.clientX - lastX) * .009;
+      lastX = e.clientX;
+    });
+
+    function stopDrag() {
+      dragging = false;
+      if (renderer && renderer.domElement) {
+        renderer.domElement.style.cursor = 'grab';
+      }
+    }
+
+    renderer.domElement.addEventListener('pointerup', stopDrag);
+    renderer.domElement.addEventListener('pointercancel', stopDrag);
+    renderer.domElement.addEventListener('lostpointercapture', stopDrag);
+
     document.querySelectorAll('[data-shade]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const shade = btn.dataset.shade;
-        if (!shadeNames[shade]) return;
-        selectedShade = shade;
+        const id = shadeProducts[btn.dataset.shade];
+        if (!id) return;
+
         updateShadeButtons(btn);
-        drawFallback();
+        setSelectedProduct(id);
+
+        const target = heroProducts.findIndex(p => p.id === id);
+        if (target >= 0) {
+          rotation += (selectedIndex - target) * .18;
+        }
       });
     });
+
+    function resize() {
+      const w = Math.max(1, host.clientWidth);
+      const h = Math.max(1, host.clientHeight);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+
+    if ('ResizeObserver' in window) {
+      resizeObserver = new ResizeObserver(resize);
+      resizeObserver.observe(host);
+    } else {
+      window.addEventListener('resize', resize);
+    }
+
+    function render(time) {
+      animationFrame = requestAnimationFrame(render);
+
+      if (!dragging) rotation += .0018;
+
+      carousel.rotation.y = rotation;
+      carousel.position.y = Math.sin(time * .0007) * .12;
+
+      cards.forEach((card, i) => {
+        if (!card) return;
+        card.rotation.x = Math.sin(time * .0005 + i) * .06;
+        card.position.y =
+          Math.cos(time * .0008 + i * .7) * .18;
+      });
+
+      renderer.render(scene, camera);
+    }
+
+    render(0);
+
+    window.addEventListener('pagehide', () => {
+      cancelAnimationFrame(animationFrame);
+      if (resizeObserver) resizeObserver.disconnect();
+
+      scene.traverse(obj => {
+        if (obj.geometry) obj.geometry.dispose();
+
+        if (obj.material) {
+          const materials = Array.isArray(obj.material)
+            ? obj.material
+            : [obj.material];
+
+          materials.forEach(material => {
+            if (material.map) material.map.dispose();
+            material.dispose();
+          });
+        }
+      });
+
+      renderer.dispose();
+    }, { once: true });
+
+  } catch (err) {
+    console.warn('3D product display could not start:', err);
+    showImageFallback();
   }
 }
 
-/* Smooth page transitions for internal page links */
+/* Smooth page transitions */
 document.querySelectorAll('a[href$=".html"]').forEach(a => a.addEventListener('click', e => {
   if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
   const url = new URL(a.href, location.href);
   if (url.origin !== location.origin) return;
   e.preventDefault();
   const overlay = $('pageTransition');
-  if (window.gsap) {
-    gsap.to(overlay, { scaleY:1, transformOrigin:'bottom', duration:.45, ease:'power2.inOut', onComplete:() => location.href = url.href });
+  if (window.gsap && overlay) {
+    gsap.to(overlay, {
+      scaleY:1,
+      transformOrigin:'bottom',
+      duration:.45,
+      ease:'power2.inOut',
+      onComplete:() => location.href = url.href
+    });
   } else {
     location.href = url.href;
   }
