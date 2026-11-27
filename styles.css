@@ -3606,3 +3606,56 @@ footer {
     transition-duration: .01ms!important;
   }
 }
+/* PRODUCT GRID SPACING IMPROVEMENT */
+.product-grid {
+    gap: 24px 18px;
+    padding: 8px 4px;
+}
+
+.product-card {
+    min-width: 0;
+    padding: 0 0 12px;
+}
+
+/* More space between product image and details */
+.product-media {
+    margin-bottom: 10px;
+    border-radius: 12px;
+}
+
+/* Better spacing around product information */
+.product-meta {
+    padding: 8px 3px 0;
+    gap: 8px;
+}
+
+/* Mobile spacing */
+@media (max-width: 760px) {
+    .product-grid {
+        column-gap: 16px;
+        row-gap: 28px;
+        padding: 8px 2px;
+    }
+
+    .product-card {
+        padding-bottom: 12px;
+    }
+
+    .product-media {
+        margin-bottom: 9px;
+        border-radius: 12px;
+    }
+
+    .product-meta {
+        padding: 8px 2px 0;
+        gap: 6px;
+    }
+}
+
+/* Smaller phones */
+@media (max-width: 390px) {
+    .product-grid {
+        column-gap: 13px;
+        row-gap: 24px;
+    }
+}
