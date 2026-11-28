@@ -1,0 +1,9 @@
+{
+  "name": "glossy-pout-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Glossy Pout storefront with secure Paystack checkout",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.0"
+  }
+}

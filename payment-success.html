@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fdf1ef">
+<meta name="description" content="Glossy Pout — Your lips. Your signature. Discover lip gloss and lip care from Benin City, Nigeria.">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Glossy Pout"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Checking your payment | Glossy Pout</title>
+<link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/images/icon-192.png"><link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,700;1,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="stage"><div class="app"><section class="scr on doc" id="doc"><div class="paycenter"><span class="kick">Glossy Pout checkout</span><h2 id="heading">Checking your payment…</h2><p id="message" style="max-width:30ch">Please wait while we confirm your transaction securely with Paystack.</p><a class="cta" href="/" style="width:100%;max-width:320px">Back to Glossy Pout</a></div></section></div></div>
+<script>
+(async()=>{const ref=new URLSearchParams(location.search).get("reference");const h=document.getElementById("heading"),m=document.getElementById("message");if(!ref){h.textContent="No payment reference found";m.textContent="Return to the shop and check your order status.";return;}try{const r=await fetch("/api/verify-payment?reference="+encodeURIComponent(ref));const d=await r.json();if(r.ok&&d.status==="paid"){h.textContent="Payment confirmed!";m.textContent="Thank you for shopping with Glossy Pout. Your order has been recorded.";try{localStorage.removeItem("gpBag");localStorage.removeItem("glossyPoutCart")}catch(e){}}else{h.textContent="Payment not confirmed yet";m.textContent=d.message||d.error||"Please contact the shop if you completed payment. Do not pay a second time until your payment status is checked.";}}catch(e){h.textContent="We couldn’t check just now";m.textContent="Please return later or contact the shop with your payment reference.";}})();
+</script>
+</body></html>
